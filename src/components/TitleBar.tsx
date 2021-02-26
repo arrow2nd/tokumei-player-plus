@@ -13,7 +13,7 @@ const TitleBar = (): JSX.Element => {
   }
 
   return (
-    <div className="TitleBar">
+    <div className="title-bar drag-area">
       <input type="image" src={minimizeIcon} onClick={handleMinimizeClick} />
       <input type="image" src={closeIcon} onClick={handleCloseClick} />
     </div>

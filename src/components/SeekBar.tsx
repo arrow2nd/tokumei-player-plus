@@ -1,13 +1,16 @@
-import React from 'react'
+import React, { useRef } from 'react'
 
 const SeekBar = (): JSX.Element => {
+  const seekRef = useRef<HTMLInputElement>(null)
+
   return (
-    <div className="SeekBar">
+    <div className="seek-bar">
       <span>00:00</span>
       <input
         className="input-range"
         type="range"
-        value="0"
+        ref={seekRef}
+        defaultValue="0"
         min="0"
         max="100"
         step="1"
