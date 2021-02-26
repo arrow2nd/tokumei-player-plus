@@ -8,16 +8,16 @@ input {
   -webkit-app-region: drag;
 }
 
-.TitleBar {
+.title-bar {
   text-align: right;
 }
 
-.Select {
+.select {
   font-size: 75%;
   text-align: center;
 }
 
-.Select select {
+.select select {
   -webkit-app-region: no-drag;
   background: #1c1c1c;
   color: #faf8f7;
@@ -26,23 +26,19 @@ input {
   outline: none;
 }
 
-.Select input[type='number'] {
+.select ::-webkit-scrollbar {
+  width: 10px;
+}
+
+.select ::-webkit-scrollbar-track {
   background: #1c1c1c;
-  color: #faf8f7;
-  cursor: pointer;
-  border: none;
-  outline: none;
-  padding: 0%;
-  width: 7%;
 }
 
-::-webkit-outer-spin-button,
-::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0%;
+.select ::-webkit-scrollbar-thumb {
+  background: #faf8f7;
 }
 
-.SeekBar {
+.seek-bar {
   margin-top: 5px;
   margin-bottom: 10px;
   font-size: 70%;
@@ -70,11 +66,11 @@ input {
   box-shadow: -100vw 0 0 100vw #b10624;
 }
 
-.Control {
+.control {
   text-align: center;
 }
 
-.PlayControl {
+.play-control {
   margin-left: 30px;
   margin-right: 30px;
 }
