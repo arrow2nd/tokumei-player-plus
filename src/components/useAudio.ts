@@ -1,39 +1,36 @@
 import { useState } from 'react'
 
 type AudioType = [
-  isPlaying: boolean,
   currentTime: number,
-  play: () => void,
+  play: (src: string) => void,
   pause: () => void,
-  setSrc: (src: string) => void,
+  resume: () => void,
   setCurrentTime: (time: number) => void
 ]
 
 export const useAudio = (): AudioType => {
   const [audioElm] = useState(new Audio())
 
-  const play = () => {
+  const play = (src: string) => {
+    console.log(`play: ${src}`)
+    audioElm.src = src
     audioElm.play()
   }
 
   const pause = () => {
+    console.log(`pause: ${audioElm.src}`)
     audioElm.pause()
   }
 
-  const setSrc = (src: string) => {
-    audioElm.src = src
+  const resume = () => {
+    console.log(`resume: ${audioElm.src}`)
+    audioElm.play()
   }
 
   const setCurrentTime = (time: number) => {
+    console.log(`time: ${time}`)
     audioElm.currentTime = time
   }
 
-  return [
-    !audioElm.paused,
-    audioElm.currentTime,
-    play,
-    pause,
-    setSrc,
-    setCurrentTime
-  ]
+  return [audioElm.currentTime, play, pause, resume, setCurrentTime]
 }
