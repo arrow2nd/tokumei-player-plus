@@ -1,9 +1,11 @@
-import React, { useRef, useEffect, useCallback, useState } from 'react'
-
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useState, useRef, useEffect, useCallback } from 'react'
+import { useRadioEpisodes } from './useRadioEpisodes'
+import { RadioData } from './RadioData'
 import radioData from '../data/radio-data.json'
 
 type SelectProps = {
-  setSrc: (url: string) => void
+  setUrl: (url: string) => void
 }
 
 const nowOnAirRadioOptions = radioData
@@ -27,52 +29,88 @@ const noLongerOnAirRadioOptions = radioData
   })
 
 const Select = (props: SelectProps): JSX.Element => {
-  const radioNameRef = useRef<HTMLSelectElement>(null)
-  const radioNumRef = useRef<HTMLSelectElement>(null)
+  const nameRef = useRef<HTMLSelectElement>(null)
+  const numRef = useRef<HTMLInputElement>(null)
 
-  const setSrc = useCallback(() => {
-    if (!radioNameRef.current?.value || !radioNumRef.current?.value) return
-    const idx: number = radioNameRef.current.selectedIndex
-    const url = radioData[idx].url
-      .replace(
-        /\[num_1\]/g,
-        radioNumRef.current.value.padStart(radioData[idx].digits_1, '0')
-      )
-      .replace(
-        /\[num_2\]/g,
-        radioNumRef.current.value.padStart(radioData[idx].digits_2, '0')
-      )
-    props.setSrc(url)
-  }, [props])
+  const [index, setIndex] = useState(0)
+  const [current, setCurrent] = useState<RadioData>(radioData[0])
 
-  useEffect(() => {
-    setSrc()
-  }, [setSrc])
+  // 話数の最大最小を取得
+  const [min, max] = useRadioEpisodes(
+    current.firstEpisode,
+    current.lastEpisode,
+    current.tag,
+    current.regex
+  )
 
-  const radioNumOptions = []
-  for (let i = 1; i < 100; i++) {
-    radioNumOptions.push(
-      <option key={i} value={i}>
-        {String(i).padStart(3, '0')}
-      </option>
-    )
+  // URLを作成
+  const createRadioUrl = useCallback(
+    (num: number) => {
+      const numStr = String(num)
+      const url = current.url
+        .replace(/\[num_1\]/g, numStr.padStart(current.digits_1, '0'))
+        .replace(/\[num_2\]/g, numStr.padStart(current.digits_2, '0'))
+      props.setUrl(url)
+    },
+    [current.digits_1, current.digits_2, current.url, props]
+  )
+
+  // ラジオ名が変更された
+  const handleChangeName = () => {
+    if (!nameRef.current?.value) return
+    const idx = nameRef.current.selectedIndex
+    setIndex(idx)
+    setCurrent(radioData[idx])
   }
+
+  // 話数が変更された
+  const handleChangeNumber = () => {
+    if (!numRef.current) return
+    // 数値が範囲内かチェック
+    const currentValue = Number(numRef.current.value)
+    const num = currentValue > max ? max : currentValue
+    numRef.current.value = String(num).padStart(3, '0')
+  }
+
+  // 話数の変更が完了した
+  const handleBlurInput = () => {
+    if (!numRef.current) return
+    // 数値が範囲内かチェック
+    const currentValue = Number(numRef.current.value)
+    const num = currentValue < min ? min : currentValue
+    numRef.current.value = String(num).padStart(3, '0')
+    createRadioUrl(num)
+  }
+
+  // ラジオ名が変更された
+  useEffect(() => {
+    if (!numRef.current || !max) return
+    numRef.current.value = String(max).padStart(3, '0')
+    // lastEpisodeが0の場合 最新話数をセット
+    if (radioData[index].lastEpisode === 0) {
+      radioData[index].lastEpisode = max
+    }
+    createRadioUrl(max)
+  }, [index, max])
 
   return (
     <div className="select drag-area">
       <select
         name="ラジオ名"
         defaultValue="0"
-        ref={radioNameRef}
-        onChange={setSrc}
+        ref={nameRef}
+        onChange={handleChangeName}
       >
         <optgroup label="放送中">{nowOnAirRadioOptions}</optgroup>
         <optgroup label="放送終了">{noLongerOnAirRadioOptions}</optgroup>
       </select>
       #
-      <select name="話数" defaultValue="0" ref={radioNumRef} onChange={setSrc}>
-        {radioNumOptions}
-      </select>
+      <input
+        type="number"
+        ref={numRef}
+        onChange={handleChangeNumber}
+        onBlur={handleBlurInput}
+      />
     </div>
   )
 }
