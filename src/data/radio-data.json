@@ -55,17 +55,6 @@
     "lastEpisode": 0
   },
   {
-    "id": "maninu-3",
-    "name": "ラジオ漫画犬血道編",
-    "tag": "ラジオ漫画犬",
-    "regex": "ラジオ漫画犬血道編(\\d+)",
-    "digits_1": 3,
-    "digits_2": 3,
-    "url": "maninu/[num_1]/[num_2].mp3",
-    "firstEpisode": 102,
-    "lastEpisode": 0
-  },
-  {
     "id": "ariari",
     "name": "ありっちゃありアワー",
     "tag": "ありっちゃありアワー",
@@ -75,28 +64,6 @@
     "url": "ariari/[num_1]/[num_2].mp3",
     "firstEpisode": 1,
     "lastEpisode": 158
-  },
-  {
-    "id": "maninu-1",
-    "name": "凸ノ・カメントツのラジオ漫画犬",
-    "tag": "ラジオ漫画犬",
-    "regex": "",
-    "digits_1": 3,
-    "digits_2": 3,
-    "url": "maninu/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 31
-  },
-  {
-    "id": "maninu-2",
-    "name": "ラジオ漫画犬漂流編",
-    "tag": "ラジオ漫画犬",
-    "regex": "",
-    "digits_1": 3,
-    "digits_2": 3,
-    "url": "maninu/[num_1]/[num_2].mp3",
-    "firstEpisode": 32,
-    "lastEpisode": 101
   },
   {
     "id": "soujanee",
@@ -166,7 +133,7 @@
   },
   {
     "id": "shimowata-1",
-    "name": "シモダテツヤと私（地獄のミサワ）",
+    "name": "シモダテツヤと私（地獄のミサワ）[1~32]",
     "tag": "シモダテツヤと私（地獄のミサワ）",
     "regex": "",
     "digits_1": 3,
@@ -177,7 +144,7 @@
   },
   {
     "id": "shimowata-2",
-    "name": "シモダテツヤと私（ヨッピー）",
+    "name": "シモダテツヤと私（ヨッピー）[33~58]",
     "tag": "シモダテツヤと私（ヨッピー）",
     "regex": "",
     "digits_1": 3,
