@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { RadioData } from './RadioData'
 
 const cache: { [s: string]: number } = {}
 
@@ -37,44 +38,43 @@ async function getLatestRadioNum(tag: string, regex: string) {
   }
 
   // 放送回
-  const num = title.match(regex)
-  if (num === null) {
+  const latest = title.match(regex)
+  if (latest === null) {
     throw new Error('最新の放送回が取得できませんでした')
   }
-  return Number(num[1])
+  return Number(latest[1])
 }
 
 export const useRadioEpisodes = (
-  first: number,
-  last: number,
-  tag: string,
-  regex: string
-): number[] => {
+  data: RadioData
+): [number[], number, number] => {
   const [numArray, setNumArray] = useState([] as number[])
+  const [latest, setMax] = useState(0)
 
   useEffect(() => {
+    const fetchLatestNumber = async () => {
+      const latest = await getLatestRadioNum(data.tag, data.regex)
+      cache[data.tag] = latest
+      setMax(latest)
+      setNumArray(createArray(data.oldest, latest))
+    }
+
     // 更新終了済みなら受け取った値をそのまま使う
-    if (last !== 0) {
-      setNumArray(createArray(first, last))
+    if (data.latest !== 0) {
+      setNumArray(createArray(data.oldest, data.latest))
       return
     }
 
     // 取得済みなら一時キャッシュから値を取得
-    if (tag in cache) {
-      console.log(`[cache] max:${cache[tag]}`)
-      setNumArray(createArray(first, cache[tag]))
+    if (data.tag in cache) {
+      setMax(cache[data.tag])
+      setNumArray(createArray(data.oldest, cache[data.tag]))
       return
     }
 
     // 最新回を取得
-    getLatestRadioNum(tag, regex)
-      .then((max) => {
-        console.log(`[get] first:${first} max:${max}`)
-        cache[tag] = max
-        setNumArray(createArray(first, max))
-      })
-      .catch((err) => console.error(err))
-  }, [first, last, tag, regex])
+    fetchLatestNumber()
+  }, [data.oldest, data.latest, data.regex, data.tag])
 
-  return numArray
+  return [numArray, data.oldest, latest]
 }
