@@ -7,8 +7,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "arispa/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 0
+    "oldest": 1,
+    "latest": 0
   },
   {
     "id": "kayouradio",
@@ -18,8 +18,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "kayouradio/[num_1]/[num_2].mp3",
-    "firstEpisode": 0,
-    "lastEpisode": 0
+    "oldest": 0,
+    "latest": 0
   },
   {
     "id": "itm",
@@ -29,8 +29,8 @@
     "digits_1": 3,
     "digits_2": 2,
     "url": "itm/[num_1]/itm_[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 0
+    "oldest": 1,
+    "latest": 0
   },
   {
     "id": "tokumei",
@@ -40,8 +40,8 @@
     "digits_1": 3,
     "digits_2": 0,
     "url": "tokumei/[num_1].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 0
+    "oldest": 1,
+    "latest": 0
   },
   {
     "id": "kamamicu",
@@ -51,8 +51,8 @@
     "digits_1": 0,
     "digits_2": 0,
     "url": "kamamicu/l[num_1]/l[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 0
+    "oldest": 1,
+    "latest": 0
   },
   {
     "id": "ariari",
@@ -62,8 +62,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "ariari/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 158
+    "oldest": 1,
+    "latest": 158
   },
   {
     "id": "soujanee",
@@ -73,8 +73,8 @@
     "digits_1": 4,
     "digits_2": 0,
     "url": "soujanee/[num_1]/soujanee.mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 100
+    "oldest": 1,
+    "latest": 100
   },
   {
     "id": "pakupaku-1",
@@ -84,8 +84,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "pakupaku/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 32
+    "oldest": 1,
+    "latest": 32
   },
   {
     "id": "pakupaku-2",
@@ -95,8 +95,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "pakupaku/[num_1]/pak[num_2].mp3",
-    "firstEpisode": 33,
-    "lastEpisode": 49
+    "oldest": 33,
+    "latest": 49
   },
   {
     "id": "dainaka",
@@ -106,8 +106,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "dainaka/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 31
+    "oldest": 1,
+    "latest": 31
   },
   {
     "id": "sebu-nagata-1",
@@ -117,8 +117,8 @@
     "digits_1": 0,
     "digits_2": 0,
     "url": "sebu-nagata/[num_1]kaime.mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 104
+    "oldest": 1,
+    "latest": 104
   },
   {
     "id": "sebu-nagata-2",
@@ -128,8 +128,8 @@
     "digits_1": 0,
     "digits_2": 0,
     "url": "sebu-nagata/[num_1]kaime/[num_2]kaime.mp3",
-    "firstEpisode": 105,
-    "lastEpisode": 250
+    "oldest": 105,
+    "latest": 250
   },
   {
     "id": "shimowata-1",
@@ -139,8 +139,8 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "shimowata/[num_1]/[num_2].mp3",
-    "firstEpisode": 1,
-    "lastEpisode": 32
+    "oldest": 1,
+    "latest": 32
   },
   {
     "id": "shimowata-2",
@@ -150,7 +150,7 @@
     "digits_1": 3,
     "digits_2": 3,
     "url": "shimowata/[num_1]/[num_2].mp3",
-    "firstEpisode": 33,
-    "lastEpisode": 58
+    "oldest": 33,
+    "latest": 58
   }
 ]

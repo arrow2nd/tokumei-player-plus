@@ -7,8 +7,8 @@ declare module '*/radio-data.json' {
     digits_1: number
     digits_2: number
     url: string
-    firstEpisode: number
-    lastEpisode: number
+    oldest: number
+    latest: number
   }
 
   const value: RadioData[]
