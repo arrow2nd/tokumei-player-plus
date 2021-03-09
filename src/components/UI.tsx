@@ -96,8 +96,8 @@ const UI = (): JSX.Element => {
         isShuffle={isShuffle}
         url={url}
         onNewPlay={handlePlay}
-        onResume={handleResume}
         onPause={handlePause}
+        onResume={handleResume}
         onIncNumber={handleIncNumber}
         onDecNumber={handleDecNumber}
         onClickShuffle={handleClickShuffle}

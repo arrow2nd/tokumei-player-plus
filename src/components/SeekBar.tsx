@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 
 type SeekBarProps = {
   currentTime: number
@@ -19,6 +19,9 @@ function createTimeStr(sec: number) {
 }
 
 const SeekBar = (props: SeekBarProps): JSX.Element => {
+  const [isDuringSeek, setIsDuringSeek] = useState(false)
+  const [seekTime, setSeekTime] = useState(0)
+
   const currentTime = useMemo(() => {
     return createTimeStr(props.currentTime)
   }, [props.currentTime])
@@ -27,8 +30,18 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
     return createTimeStr(props.durationTime)
   }, [props.durationTime])
 
-  const handleSeek = (e: React.MouseEvent<HTMLInputElement>) => {
-    props.onSeek(Number(e.currentTarget.value))
+  // シーク開始
+  const handleSeekStart = () => setIsDuringSeek(true)
+
+  // シーク終了
+  const handleSeekFinish = () => {
+    props.onSeek(seekTime)
+    setTimeout(() => setIsDuringSeek(false), 500)
+  }
+
+  // シーク中
+  const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSeekTime(Number(e.currentTarget.value))
   }
 
   return (
@@ -40,7 +53,10 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
         min="0"
         max={props.durationTime}
         step="1"
-        onMouseUp={handleSeek}
+        value={isDuringSeek ? seekTime : props.currentTime}
+        onChange={handleSeek}
+        onMouseDown={handleSeekStart}
+        onMouseUp={handleSeekFinish}
       />
       <span>{durationTime}</span>
     </div>
