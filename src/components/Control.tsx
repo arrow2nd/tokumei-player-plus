@@ -13,35 +13,31 @@ type ControlProps = {
   isShuffle: boolean
   url: string
   onNewPlay: () => void
-  onResume: () => void
   onPause: () => void
+  onResume: () => void
   onIncNumber: () => void
   onDecNumber: () => void
   onClickShuffle: () => void
 }
 
 const Control = (props: ControlProps): JSX.Element => {
-  const [playCtrlIcon, setPlayCtrlIcon] = useState(playIcon)
   const [url, setUrl] = useState('')
 
+  const playCtrlIcon = props.isPlaying ? pauseIcon : playIcon
   const shuffleIcon = props.isShuffle ? shuffleOnIcon : shuffleOffIcon
 
   const handlePlayCtrlClick = useCallback(() => {
     // 新規再生
     if (props.url !== url) {
-      setPlayCtrlIcon(pauseIcon)
       setUrl(props.url)
       props.onNewPlay()
       return
     }
 
+    // ポーズ・レジューム
     if (props.isPlaying) {
-      // ポーズ
-      setPlayCtrlIcon(playIcon)
       props.onPause()
     } else {
-      // レジューム
-      setPlayCtrlIcon(pauseIcon)
       props.onResume()
     }
   }, [props, url])
