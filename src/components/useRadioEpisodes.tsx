@@ -1,19 +1,25 @@
-import { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { RadioData } from './RadioData'
 
 const cache: { [s: string]: number } = {}
 
 /**
- * 最小値～最大値が格納された配列を作成
+ * 指定範囲の値が入ったoption要素を作成
  *
  * @param min 最小値
  * @param max 最大値
- * @returns 数値配列
+ * @returns option要素の配列
  */
-function createArray(min: number, max: number): number[] {
-  return min === 0
-    ? [...Array(max + 1).keys()]
-    : [...Array(max).keys()].map((i) => ++i)
+function createOptions(min: number, max: number): JSX.Element[] {
+  const numArray =
+    min === 0
+      ? [...Array(max + 1).keys()]
+      : [...Array(max).keys()].map((i) => ++i)
+  return numArray.map((e) => (
+    <option key={e} value={e}>
+      {'# ' + String(e).padStart(3, '0')}
+    </option>
+  ))
 }
 
 /**
@@ -42,33 +48,35 @@ async function getLatestRadioNum(tag: string, regex: string) {
   if (latest === null) {
     throw new Error('最新の放送回が取得できませんでした')
   }
+
   return Number(latest[1])
 }
 
 export const useRadioEpisodes = (
   data: RadioData
-): [number[], number, number] => {
-  const [numArray, setNumArray] = useState([] as number[])
-  const [latest, setMax] = useState(0)
+): [JSX.Element[], number, number] => {
+  const [options, setOptions] = useState([] as JSX.Element[])
+  const [latest, setLatest] = useState(0)
 
   useEffect(() => {
     const fetchLatestNumber = async () => {
       const latest = await getLatestRadioNum(data.tag, data.regex)
       cache[data.tag] = latest
-      setMax(latest)
-      setNumArray(createArray(data.oldest, latest))
+      setLatest(latest)
+      setOptions(createOptions(data.oldest, latest))
     }
 
     // 更新終了済みなら受け取った値をそのまま使う
     if (data.latest !== 0) {
-      setNumArray(createArray(data.oldest, data.latest))
+      setLatest(data.latest)
+      setOptions(createOptions(data.oldest, data.latest))
       return
     }
 
     // 取得済みなら一時キャッシュから値を取得
     if (data.tag in cache) {
-      setMax(cache[data.tag])
-      setNumArray(createArray(data.oldest, cache[data.tag]))
+      setLatest(cache[data.tag])
+      setOptions(createOptions(data.oldest, cache[data.tag]))
       return
     }
 
@@ -76,5 +84,5 @@ export const useRadioEpisodes = (
     fetchLatestNumber()
   }, [data.oldest, data.latest, data.regex, data.tag])
 
-  return [numArray, data.oldest, latest]
+  return [options, data.oldest, latest]
 }

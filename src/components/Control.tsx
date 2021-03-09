@@ -13,7 +13,7 @@ type ControlProps = {
   onNewPlay: () => void
   onResume: () => void
   onPause: () => void
-  onAddNumber: () => void
+  onIncNumber: () => void
   onDecNumber: () => void
   onChangeStatus: (f: boolean) => void
 }
@@ -51,7 +51,7 @@ const Control = (props: ControlProps): JSX.Element => {
       <span className="play-control">
         <input type="image" src={skipPrevIcon} onClick={props.onDecNumber} />
         <input type="image" src={playCtrlIcon} onClick={handlePlayCtrlClick} />
-        <input type="image" src={skipNextIcon} onClick={props.onAddNumber} />
+        <input type="image" src={skipNextIcon} onClick={props.onIncNumber} />
       </span>
       <input type="image" src={shuffleIcon} />
     </div>
