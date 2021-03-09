@@ -7,11 +7,19 @@ import { useRadioEpisodes } from './useRadioEpisodes'
 import radioData from '../data/radio-data.json'
 
 const UI = (): JSX.Element => {
-  const [isPlaying, setIsPlaying] = useState(false)
   const [currentIndex, setCurrentIndex] = useState(0)
   const [currentNumber, setCurrentNumber] = useState(1)
+  const [durationTime, setDurationTime] = useState(0)
 
-  const [currentTime, play, pause, resume, setCurrentTime] = useAudio()
+  const [
+    isPlaying,
+    currentTime,
+    play,
+    pause,
+    resume,
+    setCurrentTime
+  ] = useAudio()
+
   const [episodeOptions, oldest, latest] = useRadioEpisodes(
     radioData[currentIndex]
   )
@@ -45,10 +53,10 @@ const UI = (): JSX.Element => {
   )
 
   // 新規再生
-  const handlePlay = useCallback(() => play(url), [play, url])
-
-  // 再生ステータス変更
-  const handleChangeStatus = useCallback((f: boolean) => setIsPlaying(f), [])
+  const handlePlay = useCallback(async () => {
+    const dTime = await play(url)
+    setDurationTime(dTime)
+  }, [play, url])
 
   // 次の回へ
   const handleIncNumber = useCallback(() => {
@@ -72,7 +80,11 @@ const UI = (): JSX.Element => {
         onChangeRadio={handlChangeRadio}
         onChangeNumber={handleChangeNumber}
       />
-      <SeekBar />
+      <SeekBar
+        currentTime={currentTime}
+        durationTime={durationTime}
+        onSeek={setCurrentTime}
+      />
       <Control
         isPlaying={isPlaying}
         url={url}
@@ -81,7 +93,6 @@ const UI = (): JSX.Element => {
         onPause={pause}
         onIncNumber={handleIncNumber}
         onDecNumber={handleDecNumber}
-        onChangeStatus={handleChangeStatus}
       />
     </>
   )

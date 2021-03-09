@@ -15,7 +15,6 @@ type ControlProps = {
   onPause: () => void
   onIncNumber: () => void
   onDecNumber: () => void
-  onChangeStatus: (f: boolean) => void
 }
 
 const Control = (props: ControlProps): JSX.Element => {
@@ -26,7 +25,6 @@ const Control = (props: ControlProps): JSX.Element => {
     // 新規再生
     if (props.url !== url) {
       setPlayCtrlIcon(pauseIcon)
-      props.onChangeStatus(true)
       setUrl(props.url)
       props.onNewPlay()
       return
@@ -42,7 +40,6 @@ const Control = (props: ControlProps): JSX.Element => {
       setPlayCtrlIcon(playIcon)
       props.onPause()
     }
-    props.onChangeStatus(isPlaying)
   }, [props, url])
 
   return (

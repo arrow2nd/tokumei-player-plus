@@ -1,8 +1,11 @@
-import { useState } from 'react'
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from 'react'
+import { useForceUpdate } from './useForceUpdate'
 
 type AudioType = [
+  isPlaying: boolean,
   currentTime: number,
-  play: (src: string) => void,
+  play: (src: string) => Promise<number>,
   pause: () => void,
   resume: () => void,
   setCurrentTime: (time: number) => void
@@ -10,27 +13,40 @@ type AudioType = [
 
 export const useAudio = (): AudioType => {
   const [audioElm] = useState(new Audio())
+  const forceUpdate = useForceUpdate()
 
-  const play = (src: string) => {
-    console.log(`play: ${src}`)
+  useEffect(() => {
+    audioElm.addEventListener('play', forceUpdate)
+    audioElm.addEventListener('pause', forceUpdate)
+    audioElm.addEventListener('ended', forceUpdate)
+    audioElm.addEventListener('timeupdate', forceUpdate)
+
+    return () => {
+      audioElm.removeEventListener('play', forceUpdate)
+      audioElm.removeEventListener('pause', forceUpdate)
+      audioElm.removeEventListener('ended', forceUpdate)
+      audioElm.removeEventListener('timeupdate', forceUpdate)
+    }
+  }, [])
+
+  const play = async (src: string): Promise<number> => {
     audioElm.src = src
-    audioElm.play()
+    await audioElm.play()
+    return audioElm.duration
   }
 
-  const pause = () => {
-    console.log(`pause: ${audioElm.src}`)
-    audioElm.pause()
-  }
+  const pause = () => audioElm.pause()
 
-  const resume = () => {
-    console.log(`resume: ${audioElm.src}`)
-    audioElm.play()
-  }
+  const resume = () => audioElm.play()
 
-  const setCurrentTime = (time: number) => {
-    console.log(`time: ${time}`)
-    audioElm.currentTime = time
-  }
+  const setCurrentTime = (time: number) => (audioElm.currentTime = time)
 
-  return [audioElm.currentTime, play, pause, resume, setCurrentTime]
+  return [
+    !audioElm.paused,
+    audioElm.currentTime,
+    play,
+    pause,
+    resume,
+    setCurrentTime
+  ]
 }
