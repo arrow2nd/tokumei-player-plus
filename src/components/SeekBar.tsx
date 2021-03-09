@@ -6,6 +6,12 @@ type SeekBarProps = {
   onSeek: (time: number) => void
 }
 
+/**
+ * 秒数からmm:ss形式の文字列を作成
+ *
+ * @param sec 秒数
+ * @returns 時間文字列
+ */
 function createTimeStr(sec: number) {
   const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
   const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
@@ -31,7 +37,6 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
       <input
         className="input-range"
         type="range"
-        // value={props.currentTime}
         min="0"
         max={props.durationTime}
         step="1"
@@ -42,4 +47,4 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
   )
 }
 
-export default SeekBar
+export default React.memo(SeekBar)

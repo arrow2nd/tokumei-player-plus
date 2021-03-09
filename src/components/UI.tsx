@@ -15,9 +15,9 @@ const UI = (): JSX.Element => {
     isPlaying,
     currentTime,
     play,
-    pause,
-    resume,
-    setCurrentTime
+    handlePause,
+    handleResume,
+    handleSeek
   ] = useAudio()
 
   const [episodeOptions, oldest, latest] = useRadioEpisodes(
@@ -52,23 +52,23 @@ const UI = (): JSX.Element => {
     []
   )
 
-  // 新規再生
-  const handlePlay = useCallback(async () => {
-    const dTime = await play(url)
-    setDurationTime(dTime)
-  }, [play, url])
-
   // 次の回へ
   const handleIncNumber = useCallback(() => {
     const num = currentNumber + 1
     setCurrentNumber(num > latest ? oldest : num)
-  }, [currentNumber, oldest, latest])
+  }, [currentNumber, latest, oldest])
 
   // 前の回へ
   const handleDecNumber = useCallback(() => {
     const num = currentNumber - 1
     setCurrentNumber(num < oldest ? latest : num)
-  }, [currentNumber, oldest, latest])
+  }, [currentNumber, latest, oldest])
+
+  // 新規再生
+  const handlePlay = useCallback(async () => {
+    const dTime = await play(url)
+    setDurationTime(dTime)
+  }, [play, url])
 
   return (
     <>
@@ -83,14 +83,14 @@ const UI = (): JSX.Element => {
       <SeekBar
         currentTime={currentTime}
         durationTime={durationTime}
-        onSeek={setCurrentTime}
+        onSeek={handleSeek}
       />
       <Control
         isPlaying={isPlaying}
         url={url}
         onNewPlay={handlePlay}
-        onResume={resume}
-        onPause={pause}
+        onResume={handleResume}
+        onPause={handlePause}
         onIncNumber={handleIncNumber}
         onDecNumber={handleDecNumber}
       />

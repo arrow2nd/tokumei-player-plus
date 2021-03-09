@@ -10,6 +10,13 @@ type SelectProps = {
   onChangeNumber: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
+/**
+ * ラジオの選択肢要素を作成
+ *
+ * @param radioData ラジオデータ
+ * @param isNowOnAir 放送中かどうか
+ * @returns ラジオの選択肢要素
+ */
 function createRadioOptions(
   radioData: RadioData[],
   isNowOnAir: boolean
@@ -50,4 +57,4 @@ const Select = (props: SelectProps): JSX.Element => {
   )
 }
 
-export default Select
+export default React.memo(Select)

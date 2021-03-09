@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useForceUpdate } from './useForceUpdate'
 
 type AudioType = [
@@ -29,17 +29,20 @@ export const useAudio = (): AudioType => {
     }
   }, [])
 
-  const play = async (src: string): Promise<number> => {
+  const play = useCallback(async (src: string): Promise<number> => {
     audioElm.src = src
     await audioElm.play()
     return audioElm.duration
-  }
+  }, [])
 
-  const pause = () => audioElm.pause()
+  const pause = useCallback(() => audioElm.pause(), [])
 
-  const resume = () => audioElm.play()
+  const resume = useCallback(() => audioElm.play(), [])
 
-  const setCurrentTime = (time: number) => (audioElm.currentTime = time)
+  const setCurrentTime = useCallback(
+    (time: number) => (audioElm.currentTime = time),
+    []
+  )
 
   return [
     !audioElm.paused,

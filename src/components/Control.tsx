@@ -30,15 +30,14 @@ const Control = (props: ControlProps): JSX.Element => {
       return
     }
 
-    const isPlaying = !props.isPlaying
-    if (isPlaying) {
-      // レジューム
-      setPlayCtrlIcon(pauseIcon)
-      props.onResume()
-    } else {
+    if (props.isPlaying) {
       // ポーズ
       setPlayCtrlIcon(playIcon)
       props.onPause()
+    } else {
+      // レジューム
+      setPlayCtrlIcon(pauseIcon)
+      props.onResume()
     }
   }, [props, url])
 
@@ -55,4 +54,4 @@ const Control = (props: ControlProps): JSX.Element => {
   )
 }
 
-export default Control
+export default React.memo(Control)
