@@ -3,6 +3,12 @@ import { RadioData } from './RadioData'
 
 const cache: { [s: string]: number } = {}
 
+type RadioEpisodesType = [
+  episodeOptions: JSX.Element[],
+  oldest: number,
+  latest: number
+]
+
 /**
  * 指定範囲の値が入ったoption要素を作成
  *
@@ -52,9 +58,7 @@ async function getLatestRadioNum(tag: string, regex: string) {
   return Number(latest[1])
 }
 
-export const useRadioEpisodes = (
-  data: RadioData
-): [JSX.Element[], number, number] => {
+export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
   const [options, setOptions] = useState([] as JSX.Element[])
   const [latest, setLatest] = useState(0)
 
