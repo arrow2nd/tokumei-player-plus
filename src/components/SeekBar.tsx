@@ -1,21 +1,43 @@
-import React, { useRef } from 'react'
+import React, { useMemo } from 'react'
 
-const SeekBar = (): JSX.Element => {
-  const seekRef = useRef<HTMLInputElement>(null)
+type SeekBarProps = {
+  currentTime: number
+  durationTime: number
+  onSeek: (time: number) => void
+}
+
+function createTimeStr(sec: number) {
+  const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
+  const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
+  return `${minStr}:${secStr}`
+}
+
+const SeekBar = (props: SeekBarProps): JSX.Element => {
+  const currentTime = useMemo(() => {
+    return createTimeStr(props.currentTime)
+  }, [props.currentTime])
+
+  const durationTime = useMemo(() => {
+    return createTimeStr(props.durationTime)
+  }, [props.durationTime])
+
+  const handleSeek = (e: React.MouseEvent<HTMLInputElement>) => {
+    props.onSeek(Number(e.currentTarget.value))
+  }
 
   return (
     <div className="seek-bar">
-      <span>00:00</span>
+      <span>{currentTime}</span>
       <input
         className="input-range"
         type="range"
-        ref={seekRef}
-        defaultValue="0"
+        // value={props.currentTime}
         min="0"
-        max="100"
+        max={props.durationTime}
         step="1"
+        onMouseUp={handleSeek}
       />
-      <span>24:00</span>
+      <span>{durationTime}</span>
     </div>
   )
 }
