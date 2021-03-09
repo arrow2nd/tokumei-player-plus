@@ -10,11 +10,11 @@ type RadioEpisodesType = [
 ]
 
 /**
- * 指定範囲の値が入ったoption要素を作成
+ * 放送回の選択肢要素を作成
  *
  * @param min 最小値
  * @param max 最大値
- * @returns option要素の配列
+ * @returns 放送回の選択肢要素
  */
 function createOptions(min: number, max: number): JSX.Element[] {
   const numArray =
@@ -29,7 +29,7 @@ function createOptions(min: number, max: number): JSX.Element[] {
 }
 
 /**
- * 最新回の番号を取得
+ * 最新回を取得
  *
  * @param tag ラジオタグ名
  * @param regex 正規表現文字列
@@ -38,7 +38,7 @@ function createOptions(min: number, max: number): JSX.Element[] {
 async function getLatestRadioNum(tag: string, regex: string) {
   const url = `https://omocoro.jp/tag/${encodeURIComponent(tag)}`
   const res = await fetch(url).catch(() => {
-    throw new Error('最新の放送回が取得できませんでした')
+    throw new Error('最新回が取得できませんでした')
   })
 
   // 解析
@@ -46,13 +46,13 @@ async function getLatestRadioNum(tag: string, regex: string) {
   const dom = new DOMParser().parseFromString(html, 'text/html').body
   const title = dom.querySelector('.title > a')?.textContent
   if (!title) {
-    throw new Error('htmlが解析できませんでした')
+    throw new Error('HTMLの解析に失敗しました')
   }
 
-  // 放送回
+  // 最新回抽出
   const latest = title.match(regex)
   if (latest === null) {
-    throw new Error('最新の放送回が取得できませんでした')
+    throw new Error('最新回が取得できませんでした')
   }
 
   return Number(latest[1])
