@@ -5,11 +5,11 @@ import closeIcon from '../images/close-white-18dp.svg'
 
 const TitleBar = (): JSX.Element => {
   const handleMinimizeClick = () => {
-    console.log('minimize')
+    window.api.WindowMinimize()
   }
 
   const handleCloseClick = () => {
-    console.log('close')
+    window.api.AppExit()
   }
 
   return (
