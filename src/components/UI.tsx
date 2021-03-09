@@ -10,6 +10,7 @@ const UI = (): JSX.Element => {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [currentNumber, setCurrentNumber] = useState(1)
   const [durationTime, setDurationTime] = useState(0)
+  const [isShuffle, setIsShuffle] = useState(false)
 
   const [
     isPlaying,
@@ -70,6 +71,11 @@ const UI = (): JSX.Element => {
     setDurationTime(dTime)
   }, [play, url])
 
+  // シャッフル切替
+  const handleClickShuffle = useCallback(() => {
+    setIsShuffle((prev) => !prev)
+  }, [])
+
   return (
     <>
       <Select
@@ -87,12 +93,14 @@ const UI = (): JSX.Element => {
       />
       <Control
         isPlaying={isPlaying}
+        isShuffle={isShuffle}
         url={url}
         onNewPlay={handlePlay}
         onResume={handleResume}
         onPause={handlePause}
         onIncNumber={handleIncNumber}
         onDecNumber={handleDecNumber}
+        onClickShuffle={handleClickShuffle}
       />
     </>
   )

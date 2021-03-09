@@ -2,24 +2,29 @@ import React, { useCallback, useState } from 'react'
 
 import playIcon from '../images/play_arrow-white-24dp.svg'
 import pauseIcon from '../images/pause-white-24dp.svg'
-import skipPrevIcon from '../images/skip_previous-white-24dp.svg'
-import skipNextIcon from '../images/skip_next-white-24dp.svg'
+import prevIcon from '../images/skip_previous-white-24dp.svg'
+import nextIcon from '../images/skip_next-white-24dp.svg'
 import openBrowserIcon from '../images/open_in_browser-white-24dp.svg'
-import shuffleIcon from '../images/shuffle-white-24dp.svg'
+import shuffleOnIcon from '../images/shuffle_on-white-24dp.svg'
+import shuffleOffIcon from '../images/shuffle-white-24dp.svg'
 
 type ControlProps = {
   isPlaying: boolean
+  isShuffle: boolean
   url: string
   onNewPlay: () => void
   onResume: () => void
   onPause: () => void
   onIncNumber: () => void
   onDecNumber: () => void
+  onClickShuffle: () => void
 }
 
 const Control = (props: ControlProps): JSX.Element => {
   const [playCtrlIcon, setPlayCtrlIcon] = useState(playIcon)
   const [url, setUrl] = useState('')
+
+  const shuffleIcon = props.isShuffle ? shuffleOnIcon : shuffleOffIcon
 
   const handlePlayCtrlClick = useCallback(() => {
     // 新規再生
@@ -45,11 +50,11 @@ const Control = (props: ControlProps): JSX.Element => {
     <div className="control">
       <input type="image" src={openBrowserIcon} />
       <span className="play-control">
-        <input type="image" src={skipPrevIcon} onClick={props.onDecNumber} />
+        <input type="image" src={prevIcon} onClick={props.onDecNumber} />
         <input type="image" src={playCtrlIcon} onClick={handlePlayCtrlClick} />
-        <input type="image" src={skipNextIcon} onClick={props.onIncNumber} />
+        <input type="image" src={nextIcon} onClick={props.onIncNumber} />
       </span>
-      <input type="image" src={shuffleIcon} />
+      <input type="image" src={shuffleIcon} onClick={props.onClickShuffle} />
     </div>
   )
 }
