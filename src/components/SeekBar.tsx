@@ -41,8 +41,13 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
 
   // シーク中
   const handleSeek = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSeekTime(Number(e.currentTarget.value))
+    const time = Number(e.currentTarget.value)
+    if (time !== seekTime) {
+      setSeekTime(time)
+    }
   }
+
+  console.log(`[render] SeekBar time=${props.currentTime}`)
 
   return (
     <div className="seek-bar">
@@ -63,4 +68,7 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
   )
 }
 
-export default React.memo(SeekBar)
+export default React.memo(
+  SeekBar,
+  (prev, next) => prev.currentTime === next.currentTime
+)

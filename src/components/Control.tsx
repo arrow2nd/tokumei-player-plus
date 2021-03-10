@@ -12,7 +12,7 @@ type ControlProps = {
   isPlaying: boolean
   isShuffle: boolean
   url: string
-  onNewPlay: () => void
+  onNewPlay: (url: string) => void
   onPause: () => void
   onResume: () => void
   onIncNumber: () => void
@@ -30,7 +30,7 @@ const Control = (props: ControlProps): JSX.Element => {
     // 新規再生
     if (props.url !== url) {
       setUrl(props.url)
-      props.onNewPlay()
+      props.onNewPlay(props.url)
       return
     }
 
