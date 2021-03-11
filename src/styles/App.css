@@ -1,17 +1,14 @@
-input[type='image'] {
-  -webkit-app-region: no-drag;
-  cursor: pointer;
-  outline: none;
-}
-
+/* ドラッグエリア */
 .drag-area {
   -webkit-app-region: drag;
 }
 
+/* タイトルバー */
 .title-bar {
   text-align: right;
 }
 
+/* セレクトボックス */
 .select {
   font-size: 75%;
   text-align: center;
@@ -26,7 +23,7 @@ input[type='image'] {
   outline: none;
 }
 
-/* スクロールバー */
+/* シークバー */
 .select ::-webkit-scrollbar {
   width: 10px;
 }
@@ -40,7 +37,7 @@ input[type='image'] {
 }
 
 .seek-bar {
-  margin-top: 5px;
+  margin-top: 8px;
   margin-bottom: 10px;
   font-size: 70%;
   text-align: center;
@@ -54,11 +51,11 @@ input[type='image'] {
   background: #faf8f7;
   overflow: hidden;
   outline: none;
-  width: 65%;
+  width: 70%;
   height: 5px;
   border-radius: 10px;
-  margin-left: 5px;
-  margin-right: 5px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 ::-webkit-slider-thumb {
@@ -70,11 +67,28 @@ input[type='image'] {
   box-shadow: -100vw 0 0 100vw #b10624;
 }
 
+/* 再生時間  */
+.time {
+  font-size: 10px;
+}
+
+/* コントロールボタン */
+input[type='image'] {
+  -webkit-app-region: no-drag;
+  cursor: pointer;
+  outline: none;
+}
+
 .control {
   text-align: center;
 }
 
 .play-control {
-  margin-left: 30px;
-  margin-right: 30px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.play-control input[type='image'] {
+  margin-left: 2px;
+  margin-right: 2px;
 }

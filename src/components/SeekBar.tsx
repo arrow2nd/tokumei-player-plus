@@ -49,7 +49,7 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
 
   return (
     <div className="seek-bar">
-      <span>{currentTime}</span>
+      <span className="time">{currentTime}</span>
       <input
         className="input-range"
         type="range"
@@ -61,7 +61,7 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
         onMouseDown={handleSeekStart}
         onMouseUp={handleSeekFinish}
       />
-      <span>{durationTime}</span>
+      <span className="time">{durationTime}</span>
     </div>
   )
 }
