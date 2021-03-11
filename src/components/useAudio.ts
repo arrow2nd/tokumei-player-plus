@@ -21,6 +21,13 @@ export const useAudio = (): AudioType => {
     audioElm.addEventListener('play', forceUpdate)
     audioElm.addEventListener('pause', forceUpdate)
     audioElm.addEventListener('timeupdate', forceUpdate)
+    audioElm.onerror = () => {
+      audioElm.pause()
+      window.api.ErrorDialog(
+        '再生に失敗しました',
+        '存在しない、または非公開になった可能性があります。'
+      )
+    }
 
     return () => {
       audioElm.removeEventListener('play', forceUpdate)

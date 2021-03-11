@@ -7,4 +7,5 @@ declare global {
 export type API = {
   AppExit: () => void
   WindowMinimize: () => void
+  ErrorDialog: (titile: string, content: string) => void
 }
