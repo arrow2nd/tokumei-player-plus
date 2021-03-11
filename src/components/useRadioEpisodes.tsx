@@ -14,18 +14,28 @@ type RadioEpisodesType = [
  *
  * @param min 最小値
  * @param max 最大値
+ * @param ignore 除外リスト
  * @returns 放送回の選択肢要素
  */
-function createOptions(min: number, max: number): JSX.Element[] {
+function createOptions(
+  min: number,
+  max: number,
+  ignore: number[]
+): JSX.Element[] {
   const numArray =
     min === 0
       ? [...Array(max + 1).keys()]
       : [...Array(max).keys()].map((i) => ++i)
-  return numArray.map((e) => (
-    <option key={e} value={e}>
-      {'# ' + String(e).padStart(3, '0')}
-    </option>
-  ))
+
+  const options = numArray
+    .filter((e) => !ignore.includes(e))
+    .map((e) => (
+      <option key={e} value={e}>
+        {'# ' + String(e).padStart(3, '0')}
+      </option>
+    ))
+
+  return options
 }
 
 /**
@@ -67,26 +77,26 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
       const latest = await getLatestRadioNum(data.tag, data.regex)
       cache[data.tag] = latest
       setLatest(latest)
-      setOptions(createOptions(data.oldest, latest))
+      setOptions(createOptions(data.oldest, latest, data.ignore))
     }
 
     // 更新終了済みなら受け取った値をそのまま使う
     if (data.latest !== 0) {
       setLatest(data.latest)
-      setOptions(createOptions(data.oldest, data.latest))
+      setOptions(createOptions(data.oldest, data.latest, data.ignore))
       return
     }
 
     // 取得済みなら一時キャッシュから値を取得
     if (data.tag in cache) {
       setLatest(cache[data.tag])
-      setOptions(createOptions(data.oldest, cache[data.tag]))
+      setOptions(createOptions(data.oldest, cache[data.tag], data.ignore))
       return
     }
 
     // 最新回を取得
     fetchLatestNumber()
-  }, [data.oldest, data.latest, data.regex, data.tag])
+  }, [data.oldest, data.latest, data.regex, data.tag, data.ignore])
 
   return [options, data.oldest, latest]
 }

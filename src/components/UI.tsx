@@ -4,7 +4,7 @@ import SeekBar from './SeekBar'
 import Control from './Control'
 import { useAudio } from './useAudio'
 import { useRadioEpisodes } from './useRadioEpisodes'
-import radioData from '../data/radio-data.json'
+import radioData from '../data/radio-data'
 
 /**
  * URLを作成
@@ -79,7 +79,7 @@ const UI = (): JSX.Element => {
   const changeEpisode = useCallback(
     (step: number, isShuffle: boolean): string => {
       let episode = isShuffle
-        ? Math.floor(Math.random() * (latest + 1))
+        ? Math.floor(Math.random() * (latest - oldest + 1)) + oldest
         : currentEpisode + step
 
       // 制限
@@ -87,6 +87,11 @@ const UI = (): JSX.Element => {
         episode = oldest
       } else if (episode < oldest) {
         episode = latest
+      }
+
+      // 除外リストにあればスキップ
+      if (radioData[currentRadioId].ignore.includes(episode)) {
+        episode += step
       }
 
       // 異なっていたら変更する
