@@ -61,6 +61,23 @@ const UI = (): JSX.Element => {
     []
   )
 
+  // Webサイトを開く
+  const handleClickOpenWebSite = useCallback(async () => {
+    const tag = radioData[currentRadioId].tag
+    const isOpenWebSite = await window.api.InfoDialog(
+      'ブラウザを開きますか？',
+      `「オモコロ」の「${tag}」のページを開きます。`
+    )
+    if (isOpenWebSite) {
+      window.api.OpenWebSite(tag)
+    }
+  }, [currentRadioId])
+
+  // シャッフル再生 ON/OFF
+  const handleClickShuffle = useCallback(() => {
+    setIsShuffle((prev) => !prev)
+  }, [])
+
   // 再生する
   const handlePlay = useCallback(
     async (url: string) => {
@@ -69,11 +86,6 @@ const UI = (): JSX.Element => {
     },
     [play]
   )
-
-  // シャッフル再生 ON/OFF
-  const handleClickShuffle = useCallback(() => {
-    setIsShuffle((prev) => !prev)
-  }, [])
 
   // 話数を変更する
   const changeEpisode = useCallback(
@@ -135,6 +147,7 @@ const UI = (): JSX.Element => {
         onPause={handlePause}
         onResume={handleResume}
         onClickShuffle={handleClickShuffle}
+        onClickOpenWebSite={handleClickOpenWebSite}
       />
     </>
   )

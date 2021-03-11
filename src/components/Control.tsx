@@ -4,7 +4,7 @@ import playIcon from '../images/play_arrow-white-24dp.svg'
 import pauseIcon from '../images/pause-white-24dp.svg'
 import prevIcon from '../images/skip_previous-white-24dp.svg'
 import nextIcon from '../images/skip_next-white-24dp.svg'
-import openBrowserIcon from '../images/open_in_browser-white-24dp.svg'
+import openIcon from '../images/open_in_browser-white-24dp.svg'
 import shuffleOnIcon from '../images/shuffle_on-white-24dp.svg'
 import shuffleOffIcon from '../images/shuffle-white-24dp.svg'
 
@@ -17,6 +17,7 @@ type ControlProps = {
   onPause: () => void
   onResume: () => void
   onClickShuffle: () => void
+  onClickOpenWebSite: () => void
 }
 
 const Control = (props: ControlProps): JSX.Element => {
@@ -50,7 +51,7 @@ const Control = (props: ControlProps): JSX.Element => {
 
   return (
     <div className="control">
-      <input type="image" src={openBrowserIcon} />
+      <input type="image" src={openIcon} onClick={props.onClickOpenWebSite} />
       <span className="play-control">
         <input type="image" src={prevIcon} onClick={handleClickPrev} />
         <input type="image" src={playCtrlIcon} onClick={handleClickPlay} />
