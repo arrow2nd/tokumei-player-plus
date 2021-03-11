@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback } from 'react'
 
 import playIcon from '../images/play_arrow-white-24dp.svg'
 import pauseIcon from '../images/pause-white-24dp.svg'
@@ -11,44 +11,50 @@ import shuffleOffIcon from '../images/shuffle-white-24dp.svg'
 type ControlProps = {
   isPlaying: boolean
   isShuffle: boolean
-  url: string
-  onNewPlay: (url: string) => void
+  currentSrc: string
+  changeEpisode: (step: number, isShuffle: boolean) => string
+  onPlay: (url: string) => void
   onPause: () => void
   onResume: () => void
-  onIncNumber: () => void
-  onDecNumber: () => void
   onClickShuffle: () => void
 }
 
 const Control = (props: ControlProps): JSX.Element => {
-  const [url, setUrl] = useState('')
-
   const playCtrlIcon = props.isPlaying ? pauseIcon : playIcon
   const shuffleIcon = props.isShuffle ? shuffleOnIcon : shuffleOffIcon
 
-  const handlePlayCtrlClick = useCallback(() => {
-    // 新規再生
-    if (props.url !== url) {
-      setUrl(props.url)
-      props.onNewPlay(props.url)
-      return
+  const handleClickPlay = useCallback(() => {
+    const nextUrl = props.changeEpisode(0, false)
+    switch (true) {
+      // 再生
+      case props.currentSrc !== nextUrl:
+        props.onPlay(nextUrl)
+        break
+      // ポーズ
+      case props.isPlaying:
+        props.onPause()
+        break
+      // レジューム
+      default:
+        props.onResume()
     }
+  }, [props])
 
-    // ポーズ・レジューム
-    if (props.isPlaying) {
-      props.onPause()
-    } else {
-      props.onResume()
-    }
-  }, [props, url])
+  const handleClickNext = useCallback(() => {
+    props.changeEpisode(1, false)
+  }, [props])
+
+  const handleClickPrev = useCallback(() => {
+    props.changeEpisode(-1, false)
+  }, [props])
 
   return (
     <div className="control">
       <input type="image" src={openBrowserIcon} />
       <span className="play-control">
-        <input type="image" src={prevIcon} onClick={props.onDecNumber} />
-        <input type="image" src={playCtrlIcon} onClick={handlePlayCtrlClick} />
-        <input type="image" src={nextIcon} onClick={props.onIncNumber} />
+        <input type="image" src={prevIcon} onClick={handleClickPrev} />
+        <input type="image" src={playCtrlIcon} onClick={handleClickPlay} />
+        <input type="image" src={nextIcon} onClick={handleClickNext} />
       </span>
       <input type="image" src={shuffleIcon} onClick={props.onClickShuffle} />
     </div>
