@@ -13,8 +13,8 @@ type SeekBarProps = {
  * @returns 時間文字列
  */
 function createTimeStr(sec: number) {
-  const minStr = String(Math.round(sec / 60)).padStart(2, '0')
-  const secStr = String(Math.round(sec % 60)).padStart(2, '0')
+  const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
+  const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
   return `${minStr}:${secStr}`
 }
 

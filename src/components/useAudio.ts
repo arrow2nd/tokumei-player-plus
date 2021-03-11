@@ -39,7 +39,7 @@ export const useAudio = (): AudioType => {
   const play = useCallback(async (src: string): Promise<number> => {
     audioElm.src = src
     await audioElm.play()
-    return Math.round(audioElm.duration)
+    return Math.floor(audioElm.duration)
   }, [])
 
   const pause = useCallback(() => audioElm.pause(), [])
