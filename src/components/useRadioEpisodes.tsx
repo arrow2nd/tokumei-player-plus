@@ -48,7 +48,9 @@ function createOptions(
 async function getLatestRadioNum(tag: string, regex: string) {
   const url = `https://omocoro.jp/tag/${encodeURIComponent(tag)}`
   const res = await fetch(url).catch(() => {
-    throw new Error('最新回が取得できませんでした')
+    throw new Error(
+      'サイトにアクセスできませんでした。ネットワークに問題がある可能性があります。'
+    )
   })
 
   // 解析
@@ -56,13 +58,17 @@ async function getLatestRadioNum(tag: string, regex: string) {
   const dom = new DOMParser().parseFromString(html, 'text/html').body
   const title = dom.querySelector('.title > a')?.textContent
   if (!title) {
-    throw new Error('HTMLの解析に失敗しました')
+    throw new Error(
+      'HTMLの解析に失敗しました。書式が変更された可能性があります。'
+    )
   }
 
   // 最新回抽出
   const latest = title.match(regex)
   if (latest === null) {
-    throw new Error('最新回が取得できませんでした')
+    throw new Error(
+      '最新回の抽出に失敗しました。書式が変更された可能性があります。'
+    )
   }
 
   return Number(latest[1])
@@ -74,7 +80,13 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
 
   useEffect(() => {
     const fetchLatestNumber = async () => {
-      const latest = await getLatestRadioNum(data.tag, data.regex)
+      let latest: number
+      try {
+        latest = await getLatestRadioNum(data.tag, data.regex)
+      } catch (err) {
+        window.api.ErrorDialog('最新回の取得に失敗しました', err.message)
+        return
+      }
       cache[data.tag] = latest
       setLatest(latest)
       setOptions(createOptions(data.oldest, latest, data.ignore))
