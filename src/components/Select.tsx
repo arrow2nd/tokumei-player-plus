@@ -5,9 +5,9 @@ type SelectProps = {
   isPlaying: boolean
   currentNumber: number
   radioData: RadioData[]
-  episodeOptions: JSX.Element[]
-  onChangeRadio: (e: React.ChangeEvent<HTMLSelectElement>) => void
-  onChangeNumber: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  episodes: JSX.Element[]
+  onChangeRadioId: (e: React.ChangeEvent<HTMLSelectElement>) => void
+  onChangeEpisode: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
 /**
@@ -33,25 +33,23 @@ function createRadioOptions(
 }
 
 const Select = (props: SelectProps): JSX.Element => {
-  const [nowOnAirRadioOptions] = useState(
-    createRadioOptions(props.radioData, true)
-  )
-  const [noLongerOnAirRadioOptions] = useState(
+  const [nowOnAirRadios] = useState(createRadioOptions(props.radioData, true))
+  const [noLongerOnAirRadios] = useState(
     createRadioOptions(props.radioData, false)
   )
 
   return (
     <div className="select drag-area">
-      <select disabled={props.isPlaying} onChange={props.onChangeRadio}>
-        <optgroup label="放送中">{nowOnAirRadioOptions}</optgroup>
-        <optgroup label="放送終了">{noLongerOnAirRadioOptions}</optgroup>
+      <select disabled={props.isPlaying} onChange={props.onChangeRadioId}>
+        <optgroup label="放送中">{nowOnAirRadios}</optgroup>
+        <optgroup label="放送終了">{noLongerOnAirRadios}</optgroup>
       </select>
       <select
         disabled={props.isPlaying}
         value={props.currentNumber}
-        onChange={props.onChangeNumber}
+        onChange={props.onChangeEpisode}
       >
-        {props.episodeOptions}
+        {props.episodes}
       </select>
     </div>
   )
