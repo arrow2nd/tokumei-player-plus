@@ -8,4 +8,5 @@ export type RadioData = {
   url: string
   oldest: number
   latest: number
+  ignore: number[]
 }
