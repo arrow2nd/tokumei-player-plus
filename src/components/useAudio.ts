@@ -42,9 +42,13 @@ export const useAudio = (): AudioType => {
     return Math.floor(audioElm.duration)
   }, [])
 
-  const pause = useCallback(() => audioElm.pause(), [])
+  const pause = useCallback(() => {
+    audioElm.pause()
+  }, [])
 
-  const resume = useCallback(() => audioElm.play(), [])
+  const resume = useCallback(() => {
+    audioElm.play()
+  }, [])
 
   const setCurrentTime = useCallback((time: number) => {
     audioElm.currentTime = time

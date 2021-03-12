@@ -31,7 +31,9 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
   }, [props.durationTime])
 
   // シーク開始
-  const handleSeekStart = () => setIsDuringSeek(true)
+  const handleSeekStart = () => {
+    setIsDuringSeek(true)
+  }
 
   // シーク終了
   const handleSeekFinish = () => {

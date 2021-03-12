@@ -21,15 +21,14 @@ function createRadioOptions(
   radioData: RadioData[],
   isNowOnAir: boolean
 ): JSX.Element[] {
-  return radioData
+  const options = radioData
     .filter((e) => (isNowOnAir ? e.latest === 0 : e.latest !== 0))
-    .map((e) => {
-      return (
-        <option key={e.id} value={e.id}>
-          {e.name}
-        </option>
-      )
-    })
+    .map((e) => (
+      <option key={e.id} value={e.id}>
+        {e.name}
+      </option>
+    ))
+  return options
 }
 
 const Select = (props: SelectProps): JSX.Element => {
