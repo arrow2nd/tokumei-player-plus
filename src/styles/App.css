@@ -23,7 +23,6 @@
   outline: none;
 }
 
-/* シークバー */
 .select ::-webkit-scrollbar {
   width: 10px;
 }
@@ -36,6 +35,7 @@
   background: #faf8f7;
 }
 
+/* シークバー */
 .seek-bar {
   margin-top: 8px;
   margin-bottom: 10px;
@@ -43,7 +43,6 @@
   text-align: center;
 }
 
-/* レンジスライダー */
 .input-range[type='range'] {
   -webkit-appearance: none;
   appearance: none;
@@ -72,7 +71,7 @@
   font-size: 10px;
 }
 
-/* コントロールボタン */
+/* ボタン */
 input[type='image'] {
   -webkit-app-region: no-drag;
   cursor: pointer;
