@@ -25,9 +25,6 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
-      - name: Set GH_TOKEN
-        run: npx cross-env GH_TOKEN=${{ secrets.GITHUB_TOKEN }}
-
       - name: Package for Windows
         if: matrix.os == 'windows-latest'
         run: |
