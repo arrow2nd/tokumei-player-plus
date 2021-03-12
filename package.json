@@ -7,12 +7,13 @@
     "email": "arrow2nd_workspace@zohomail.com"
   },
   "license": "MIT",
-  "main": "./dist/main.js",
+  "main": "./build/main.js",
   "private": true,
   "scripts": {
     "start": "run-s clean build serve",
     "start:dev": "run-s clean build:dev serve",
-    "clean": "rimraf dist",
+    "clean": "rimraf ./build",
+    "clean:dist": "rimraf \"./dist/!(*.exe|*.deb|*.AppImage|*.dmg)\"",
     "build": "webpack",
     "build:dev": "cross-env NODE_ENV=\"development\" webpack",
     "serve": "electron .",
@@ -21,6 +22,12 @@
   },
   "build": {
     "appId": "com.arrow2nd.tokumei",
+    "files": [
+      "./build/**/*"
+    ],
+    "directories": {
+      "output": "./dist"
+    },
     "win": {
       "target": [
         "nsis",
@@ -39,9 +46,6 @@
       ],
       "icon": "./icon",
       "category": "Audio"
-    },
-    "directories": {
-      "output": "build"
     }
   },
   "devDependencies": {
