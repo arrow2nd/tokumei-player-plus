@@ -1,8 +1,13 @@
 {
   "name": "tokumei-player-plus",
   "version": "1.0.0",
-  "main": "./dist/main.js",
+  "description": "Webメディア「オモコロ」のラジオを再生する非公式のソフトウェア",
+  "author": {
+    "name": "arrow2nd",
+    "email": "arrow2nd_workspace@zohomail.com"
+  },
   "license": "MIT",
+  "main": "./dist/main.js",
   "private": true,
   "scripts": {
     "start": "run-s clean build serve",
@@ -10,7 +15,34 @@
     "clean": "rimraf dist",
     "build": "webpack",
     "build:dev": "cross-env NODE_ENV=\"development\" webpack",
-    "serve": "electron ."
+    "serve": "electron .",
+    "pack:win": "electron-builder --win --x64",
+    "pack:linux": "electron-builder --linux"
+  },
+  "build": {
+    "appId": "com.arrow2nd.tokumei",
+    "win": {
+      "target": [
+        "nsis",
+        "portable"
+      ],
+      "icon": "./icon/icon.ico"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb"
+      ],
+      "icon": "./icon",
+      "category": "Audio"
+    },
+    "directories": {
+      "output": "build"
+    }
   },
   "devDependencies": {
     "@types/node": "^14.14.33",
@@ -21,6 +53,7 @@
     "cross-env": "^7.0.3",
     "css-loader": "^5.1.2",
     "electron": "^12.0.1",
+    "electron-builder": "^22.10.5",
     "eslint": "^7.21.0",
     "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react": "^7.22.0",
