@@ -21,7 +21,7 @@ function createWindow(): void {
     }
   })
 
-  win.loadFile('./dist/index.html')
+  win.loadFile('./build/index.html')
 
   // メニューを無効化
   Menu.setApplicationMenu(null)

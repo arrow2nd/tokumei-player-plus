@@ -12,7 +12,7 @@ const base = {
     asset: true
   },
   output: {
-    path: path.resolve(__dirname, 'dist'),
+    path: path.resolve(__dirname, 'build'),
     publicPath: './',
     filename: '[name].js',
     assetModuleFilename: 'images/[name][ext]'
