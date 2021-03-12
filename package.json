@@ -46,7 +46,8 @@
       ],
       "icon": "./icon",
       "category": "Audio"
-    }
+    },
+    "publish": null
   },
   "devDependencies": {
     "@types/node": "^14.14.33",
