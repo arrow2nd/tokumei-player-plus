@@ -38,7 +38,7 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
   // シーク終了
   const handleSeekFinish = () => {
     props.onSeek(seekTime)
-    setTimeout(() => setIsDuringSeek(false), 500)
+    setTimeout(() => setIsDuringSeek(false), 1000)
   }
 
   // シーク中
