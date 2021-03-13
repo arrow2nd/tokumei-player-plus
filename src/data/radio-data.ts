@@ -11,31 +11,8 @@ const data: RadioData[] = [
     url: 'arispa/[num_1]/[num_2].mp3',
     oldest: 1,
     latest: 0,
-    ignore: []
-  },
-  {
-    id: 'kayouradio',
-    name: 'マンスーン・ヤスミノの音声放送',
-    tag: '音声放送',
-    regex: '【(\\d{1,3})】',
-    digits_1: 3,
-    digits_2: 3,
-    url: 'kayouradio/[num_1]/[num_2].mp3',
-    oldest: 0,
-    latest: 0,
-    ignore: []
-  },
-  {
-    id: 'itm',
-    name: '長島・加藤のイうてるマにイっちゃってる',
-    tag: 'イうてるマにイっちゃってる',
-    regex: '【(\\d{1,3})】',
-    digits_1: 3,
-    digits_2: 2,
-    url: 'itm/[num_1]/itm_[num_2].mp3',
-    oldest: 1,
-    latest: 0,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
     id: 'tokumei',
@@ -47,7 +24,8 @@ const data: RadioData[] = [
     url: 'tokumei/[num_1].mp3',
     oldest: 1,
     latest: 0,
-    ignore: [217]
+    ignore: [217],
+    isWithoutChangeShow: true
   },
   {
     id: 'kamamicu',
@@ -59,7 +37,47 @@ const data: RadioData[] = [
     url: 'kamamicu/l[num_1]/l[num_2].mp3',
     oldest: 1,
     latest: 0,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'itm',
+    name: '長島・加藤のイうてるマにイっちゃってる',
+    tag: 'イうてるマにイっちゃってる',
+    regex: '【(\\d{1,3})】',
+    digits_1: 3,
+    digits_2: 2,
+    url: 'itm/[num_1]/itm_[num_2].mp3',
+    oldest: 1,
+    latest: 0,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'kayouradio',
+    name: 'マンスーン・ヤスミノの音声放送',
+    tag: '音声放送',
+    regex: '【(\\d{1,3})】',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'kayouradio/[num_1]/[num_2].mp3',
+    oldest: 0,
+    latest: 0,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'maninu-3',
+    name: 'ラジオ漫画犬血道編',
+    tag: 'ラジオ漫画犬',
+    regex: 'ラジオ漫画犬血道編(\\d+)',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'maninu/[num_1]/[num_2].mp3',
+    oldest: 102,
+    latest: 0,
+    ignore: [],
+    isWithoutChangeShow: false
   },
   {
     id: 'ariari',
@@ -71,55 +89,34 @@ const data: RadioData[] = [
     url: 'ariari/[num_1]/[num_2].mp3',
     oldest: 1,
     latest: 158,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
-    id: 'soujanee',
-    name: 'そうじゃねえだろのラジオじゃねえだろ！',
-    tag: 'ラジオじゃねえだろ',
-    regex: '',
-    digits_1: 4,
-    digits_2: 0,
-    url: 'soujanee/[num_1]/soujanee.mp3',
-    oldest: 1,
-    latest: 100,
-    ignore: []
-  },
-  {
-    id: 'pakupaku-1',
-    name: 'たかや・マンスーンのパクパクラジオ [1~32]',
-    tag: 'パクパクラジオ',
+    id: 'shimowata-1',
+    name: 'シモダテツヤと私（地獄のミサワ）',
+    tag: 'シモダテツヤと私（地獄のミサワ）',
     regex: '',
     digits_1: 3,
     digits_2: 3,
-    url: 'pakupaku/[num_1]/[num_2].mp3',
+    url: 'shimowata/[num_1]/[num_2].mp3',
     oldest: 1,
     latest: 32,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
-    id: 'pakupaku-2',
-    name: 'たかや・マンスーンのパクパクラジオ [33~49]',
-    tag: 'パクパクラジオ',
+    id: 'shimowata-2',
+    name: 'シモダテツヤと私（ヨッピー）',
+    tag: 'シモダテツヤと私（ヨッピー）',
     regex: '',
     digits_1: 3,
     digits_2: 3,
-    url: 'pakupaku/[num_1]/pak[num_2].mp3',
+    url: 'shimowata/[num_1]/[num_2].mp3',
     oldest: 33,
-    latest: 49,
-    ignore: []
-  },
-  {
-    id: 'dainaka',
-    name: 'みくのしん・おおきちの大仲良しラジオ',
-    tag: '大仲良しラジオ',
-    regex: '',
-    digits_1: 3,
-    digits_2: 3,
-    url: 'dainaka/[num_1]/[num_2].mp3',
-    oldest: 1,
-    latest: 31,
-    ignore: []
+    latest: 58,
+    ignore: [],
+    isWithoutChangeShow: false
   },
   {
     id: 'sebu-nagata-1',
@@ -131,7 +128,8 @@ const data: RadioData[] = [
     url: 'sebu-nagata/[num_1]kaime.mp3',
     oldest: 1,
     latest: 104,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
     id: 'sebu-nagata-2',
@@ -143,31 +141,86 @@ const data: RadioData[] = [
     url: 'sebu-nagata/[num_1]kaime/[num_2]kaime.mp3',
     oldest: 105,
     latest: 250,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
-    id: 'shimowata-1',
-    name: 'シモダテツヤと私（地獄のミサワ）[1~32]',
-    tag: 'シモダテツヤと私（地獄のミサワ）',
+    id: 'soujanee',
+    name: 'そうじゃねえだろのラジオじゃねえだろ！',
+    tag: 'ラジオじゃねえだろ',
+    regex: '',
+    digits_1: 4,
+    digits_2: 0,
+    url: 'soujanee/[num_1]/soujanee.mp3',
+    oldest: 1,
+    latest: 100,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'pakupaku-1',
+    name: 'たかや・マンスーンのパクパクラジオ [1~32]',
+    tag: 'パクパクラジオ',
     regex: '',
     digits_1: 3,
     digits_2: 3,
-    url: 'shimowata/[num_1]/[num_2].mp3',
+    url: 'pakupaku/[num_1]/[num_2].mp3',
     oldest: 1,
     latest: 32,
-    ignore: []
+    ignore: [],
+    isWithoutChangeShow: true
   },
   {
-    id: 'shimowata-2',
-    name: 'シモダテツヤと私（ヨッピー）[33~58]',
-    tag: 'シモダテツヤと私（ヨッピー）',
+    id: 'pakupaku-2',
+    name: 'たかや・マンスーンのパクパクラジオ [33~49]',
+    tag: 'パクパクラジオ',
     regex: '',
     digits_1: 3,
     digits_2: 3,
-    url: 'shimowata/[num_1]/[num_2].mp3',
+    url: 'pakupaku/[num_1]/pak[num_2].mp3',
     oldest: 33,
-    latest: 58,
-    ignore: []
+    latest: 49,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'maninu-1',
+    name: '凸ノ・カメントツのラジオ漫画犬',
+    tag: 'ラジオ漫画犬',
+    regex: '',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'maninu/[num_1]/[num_2].mp3',
+    oldest: 1,
+    latest: 31,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'dainaka',
+    name: 'みくのしん・おおきちの大仲良しラジオ',
+    tag: '大仲良しラジオ',
+    regex: '',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'dainaka/[num_1]/[num_2].mp3',
+    oldest: 1,
+    latest: 31,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'maninu-2',
+    name: 'ラジオ漫画犬漂流編',
+    tag: 'ラジオ漫画犬',
+    regex: '',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'maninu/[num_1]/[num_2].mp3',
+    oldest: 32,
+    latest: 101,
+    ignore: [],
+    isWithoutChangeShow: false
   }
 ]
 
