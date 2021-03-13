@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import data from '../data/radio-data'
 import { RadioData } from './RadioData'
 
 const cache: { [s: string]: number } = {}
@@ -10,28 +11,31 @@ type RadioEpisodesType = [
 ]
 
 /**
- * 放送回の選択肢要素を作成
+ * 話数の選択肢要素を作成
  *
  * @param min 最小値
  * @param max 最大値
  * @param ignore 除外リスト
- * @returns 放送回の選択肢要素
+ * @param isWithoutChangeShow 値をそのまま表示するか（falseなら話数を１から表示）
+ * @returns 話数の選択肢要素
  */
 function createOptions(
   min: number,
   max: number,
-  ignore: number[]
+  ignore: number[],
+  isWithoutChangeShow: boolean
 ): JSX.Element[] {
+  const elementCount = min <= 1 ? max : max - min + 1
   const numArray =
     min === 0
-      ? [...Array(max + 1).keys()]
-      : [...Array(max).keys()].map((i) => ++i)
+      ? [...Array(elementCount + 1).keys()]
+      : [...Array(elementCount).keys()].map((i) => i + min)
 
   const options = numArray
     .filter((e) => !ignore.includes(e))
     .map((e) => (
       <option key={e} value={e}>
-        {'# ' + String(e).padStart(3, '0')}
+        {'# ' + String(isWithoutChangeShow ? e : e - min + 1).padStart(3, '0')}
       </option>
     ))
 
@@ -39,11 +43,11 @@ function createOptions(
 }
 
 /**
- * 最新回を取得
+ * 最新の話数を取得
  *
  * @param tag ラジオタグ名
  * @param regex 正規表現文字列
- * @return 最新回の番号
+ * @return 最新の話数
  */
 async function getLatestRadioNum(tag: string, regex: string) {
   const url = `https://omocoro.jp/tag/${encodeURIComponent(tag)}`
@@ -67,7 +71,7 @@ async function getLatestRadioNum(tag: string, regex: string) {
   const latest = title.match(regex)
   if (latest === null) {
     throw new Error(
-      '最新回の抽出に失敗しました。書式が変更された可能性があります。'
+      '話数の抽出に失敗しました。書式が変更された可能性があります。'
     )
   }
 
@@ -84,29 +88,57 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
       try {
         latest = await getLatestRadioNum(data.tag, data.regex)
       } catch (err) {
-        window.api.ErrorDialog('最新回の取得に失敗しました', err.message)
+        window.api.ErrorDialog('最新の話数が取得できませんでした', err.message)
         return
       }
-      cache[data.tag] = latest
+
+      // 話数とファイル名のズレを修正
+      if (data.tag === 'ラジオ漫画犬') {
+        latest += data.oldest - 1
+      }
+
+      // キャッシュする
+      cache[data.id] = latest
       setLatest(latest)
-      setOptions(createOptions(data.oldest, latest, data.ignore))
+      setOptions(
+        createOptions(
+          data.oldest,
+          latest,
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
     }
 
     // 更新終了済みなら受け取った値をそのまま使う
     if (data.latest !== 0) {
       setLatest(data.latest)
-      setOptions(createOptions(data.oldest, data.latest, data.ignore))
+      setOptions(
+        createOptions(
+          data.oldest,
+          data.latest,
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
       return
     }
 
     // 取得済みなら一時キャッシュから値を取得
-    if (data.tag in cache) {
-      setLatest(cache[data.tag])
-      setOptions(createOptions(data.oldest, cache[data.tag], data.ignore))
+    if (data.id in cache) {
+      setLatest(cache[data.id])
+      setOptions(
+        createOptions(
+          data.oldest,
+          cache[data.id],
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
       return
     }
 
-    // 最新回を取得
+    // 話数を取得
     fetchLatestNumber()
   }, [data.oldest, data.latest, data.regex, data.tag, data.ignore])
 

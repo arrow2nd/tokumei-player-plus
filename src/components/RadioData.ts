@@ -9,4 +9,5 @@ export type RadioData = {
   oldest: number
   latest: number
   ignore: number[]
+  isWithoutChangeShow: boolean
 }
