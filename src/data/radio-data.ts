@@ -28,19 +28,6 @@ const data: RadioData[] = [
     isWithoutChangeShow: true
   },
   {
-    id: 'kamamicu',
-    name: 'かまってみくのしんLove you',
-    tag: 'かまってみくのしん',
-    regex: '【(\\d{1,3})】',
-    digits_1: 0,
-    digits_2: 0,
-    url: 'kamamicu/l[num_1]/l[num_2].mp3',
-    oldest: 1,
-    latest: 0,
-    ignore: [],
-    isWithoutChangeShow: true
-  },
-  {
     id: 'itm',
     name: '長島・加藤のイうてるマにイっちゃってる',
     tag: 'イうてるマにイっちゃってる',
@@ -89,6 +76,19 @@ const data: RadioData[] = [
     url: 'ariari/[num_1]/[num_2].mp3',
     oldest: 1,
     latest: 158,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
+    id: 'kamamicu',
+    name: 'かまってみくのしんLove you',
+    tag: 'かまってみくのしん',
+    regex: '',
+    digits_1: 0,
+    digits_2: 0,
+    url: 'kamamicu/l[num_1]/l[num_2].mp3',
+    oldest: 1,
+    latest: 51,
     ignore: [],
     isWithoutChangeShow: true
   },
