@@ -6,18 +6,6 @@ type SeekBarProps = {
   onSeek: (time: number) => void
 }
 
-/**
- * 秒数からmm:ss形式の文字列を作成
- *
- * @param sec 秒数
- * @returns 時間文字列
- */
-function createTimeStr(sec: number) {
-  const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
-  const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
-  return `${minStr}:${secStr}`
-}
-
 const SeekBar = (props: SeekBarProps): JSX.Element => {
   const [isDuringSeek, setIsDuringSeek] = useState(false)
   const [seekTime, setSeekTime] = useState(0)
@@ -66,6 +54,18 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
       <span className="time">{durationTime}</span>
     </div>
   )
+}
+
+/**
+ * 秒数からmm:ss形式の文字列を作成
+ *
+ * @param sec 秒数
+ * @returns 時間文字列
+ */
+function createTimeStr(sec: number) {
+  const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
+  const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
+  return `${minStr}:${secStr}`
 }
 
 export default React.memo(
