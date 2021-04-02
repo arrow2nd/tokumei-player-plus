@@ -28,6 +28,19 @@ const data: RadioData[] = [
     isWithoutChangeShow: true
   },
   {
+    id: 'kamamicu-ks',
+    name: '作業用かまみく',
+    tag: 'かまってみくのしん',
+    regex: '【(\\d+)】',
+    digits_1: 0,
+    digits_2: 0,
+    url: 'kamamicu/ks[num_1]/ks[num_2].mp3',
+    oldest: 1,
+    latest: 0,
+    ignore: [],
+    isWithoutChangeShow: true
+  },
+  {
     id: 'itm',
     name: '長島・加藤のイうてるマにイっちゃってる',
     tag: 'イうてるマにイっちゃってる',
