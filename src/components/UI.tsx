@@ -6,22 +6,6 @@ import { useAudio } from './useAudio'
 import { useRadioEpisodes } from './useRadioEpisodes'
 import radioData from '../data/radio-data'
 
-/**
- * URLを作成
- *
- * @param radioId ラジオID
- * @param episodeNo 話数
- * @returns URL文字列
- */
-function createURL(radioId: number, episodeNo: number) {
-  const num = String(episodeNo)
-  const currentRadio = radioData[radioId]
-  const path = currentRadio.url
-    .replace(/\[num_1\]/g, num.padStart(currentRadio.digits_1, '0'))
-    .replace(/\[num_2\]/g, num.padStart(currentRadio.digits_2, '0'))
-  return 'https://omocoro.heteml.net/radio/' + path
-}
-
 const UI = (): JSX.Element => {
   const [currentRadioId, setCurrentRadioId] = useState(0)
   const [currentEpisode, setCurrentEpisode] = useState(1)
@@ -151,6 +135,22 @@ const UI = (): JSX.Element => {
       />
     </>
   )
+}
+
+/**
+ * URLを作成
+ *
+ * @param radioId ラジオID
+ * @param episodeNo 話数
+ * @returns URL文字列
+ */
+function createURL(radioId: number, episodeNo: number) {
+  const num = String(episodeNo)
+  const currentRadio = radioData[radioId]
+  const path = currentRadio.url
+    .replace(/\[num_1\]/g, num.padStart(currentRadio.digits_1, '0'))
+    .replace(/\[num_2\]/g, num.padStart(currentRadio.digits_2, '0'))
+  return 'https://omocoro.heteml.net/radio/' + path
 }
 
 export default UI

@@ -10,6 +10,29 @@ type SelectProps = {
   onChangeEpisode: (e: React.ChangeEvent<HTMLSelectElement>) => void
 }
 
+const Select = (props: SelectProps): JSX.Element => {
+  const [nowOnAirRadios] = useState(createRadioOptions(props.radioData, true))
+  const [noLongerOnAirRadios] = useState(
+    createRadioOptions(props.radioData, false)
+  )
+
+  return (
+    <div className="select drag-area">
+      <select disabled={props.isPlaying} onChange={props.onChangeRadioId}>
+        <optgroup label="更新中">{nowOnAirRadios}</optgroup>
+        <optgroup label="更新終了">{noLongerOnAirRadios}</optgroup>
+      </select>
+      <select
+        disabled={props.isPlaying}
+        value={props.currentNumber}
+        onChange={props.onChangeEpisode}
+      >
+        {props.episodes}
+      </select>
+    </div>
+  )
+}
+
 /**
  * ラジオの選択肢要素を作成
  *
@@ -29,29 +52,6 @@ function createRadioOptions(
       </option>
     ))
   return options
-}
-
-const Select = (props: SelectProps): JSX.Element => {
-  const [nowOnAirRadios] = useState(createRadioOptions(props.radioData, true))
-  const [noLongerOnAirRadios] = useState(
-    createRadioOptions(props.radioData, false)
-  )
-
-  return (
-    <div className="select drag-area">
-      <select disabled={props.isPlaying} onChange={props.onChangeRadioId}>
-        <optgroup label="放送中">{nowOnAirRadios}</optgroup>
-        <optgroup label="放送終了">{noLongerOnAirRadios}</optgroup>
-      </select>
-      <select
-        disabled={props.isPlaying}
-        value={props.currentNumber}
-        onChange={props.onChangeEpisode}
-      >
-        {props.episodes}
-      </select>
-    </div>
-  )
 }
 
 export default React.memo(Select)

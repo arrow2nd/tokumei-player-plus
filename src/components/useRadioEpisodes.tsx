@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import data from '../data/radio-data'
 import { RadioData } from './RadioData'
 
 const cache: { [s: string]: number } = {}
@@ -9,6 +8,73 @@ type RadioEpisodesType = [
   oldest: number,
   latest: number
 ]
+
+export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
+  const [options, setOptions] = useState([] as JSX.Element[])
+  const [latest, setLatest] = useState(0)
+
+  useEffect(() => {
+    const fetchLatestNumber = async () => {
+      let latest: number
+      try {
+        latest = await getLatestRadioNum(data.tag, data.regex)
+      } catch (err) {
+        window.api.ErrorDialog('最新の話数が取得できませんでした', err.message)
+        return
+      }
+
+      // 話数とファイル名のズレを修正
+      if (data.tag === 'ラジオ漫画犬') {
+        latest += data.oldest - 1
+      }
+
+      // キャッシュする
+      cache[data.id] = latest
+      setLatest(latest)
+      setOptions(
+        createOptions(
+          data.oldest,
+          latest,
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
+    }
+
+    // 更新終了済みなら受け取った値をそのまま使う
+    if (data.latest !== 0) {
+      setLatest(data.latest)
+      setOptions(
+        createOptions(
+          data.oldest,
+          data.latest,
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
+      return
+    }
+
+    // 取得済みなら一時キャッシュから値を取得
+    if (data.id in cache) {
+      setLatest(cache[data.id])
+      setOptions(
+        createOptions(
+          data.oldest,
+          cache[data.id],
+          data.ignore,
+          data.isWithoutChangeShow
+        )
+      )
+      return
+    }
+
+    // 話数を取得
+    fetchLatestNumber()
+  }, [data.oldest, data.latest, data.regex, data.tag, data.ignore])
+
+  return [options, data.oldest, latest]
+}
 
 /**
  * 話数の選択肢要素を作成
@@ -76,71 +142,4 @@ async function getLatestRadioNum(tag: string, regex: string) {
   }
 
   return Number(latest[1])
-}
-
-export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
-  const [options, setOptions] = useState([] as JSX.Element[])
-  const [latest, setLatest] = useState(0)
-
-  useEffect(() => {
-    const fetchLatestNumber = async () => {
-      let latest: number
-      try {
-        latest = await getLatestRadioNum(data.tag, data.regex)
-      } catch (err) {
-        window.api.ErrorDialog('最新の話数が取得できませんでした', err.message)
-        return
-      }
-
-      // 話数とファイル名のズレを修正
-      if (data.tag === 'ラジオ漫画犬') {
-        latest += data.oldest - 1
-      }
-
-      // キャッシュする
-      cache[data.id] = latest
-      setLatest(latest)
-      setOptions(
-        createOptions(
-          data.oldest,
-          latest,
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
-    }
-
-    // 更新終了済みなら受け取った値をそのまま使う
-    if (data.latest !== 0) {
-      setLatest(data.latest)
-      setOptions(
-        createOptions(
-          data.oldest,
-          data.latest,
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
-      return
-    }
-
-    // 取得済みなら一時キャッシュから値を取得
-    if (data.id in cache) {
-      setLatest(cache[data.id])
-      setOptions(
-        createOptions(
-          data.oldest,
-          cache[data.id],
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
-      return
-    }
-
-    // 話数を取得
-    fetchLatestNumber()
-  }, [data.oldest, data.latest, data.regex, data.tag, data.ignore])
-
-  return [options, data.oldest, latest]
 }
