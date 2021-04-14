@@ -123,23 +123,26 @@ async function getLatestRadioNum(tag: string, regex: string) {
     )
   })
 
-  // 解析
+  // HTMLを解析
   const html = await res.text()
   const dom = new DOMParser().parseFromString(html, 'text/html').body
-  const title = dom.querySelector('.title > a')?.textContent
-  if (!title) {
+
+  // ラジオのタイトル要素を取得
+  const titleNode = dom.querySelectorAll('.title > a')
+  if (!titleNode) {
     throw new Error(
       'HTMLの解析に失敗しました。書式が変更された可能性があります。'
     )
   }
 
-  // 最新回抽出
-  const latest = title.match(regex)
-  if (latest === null) {
-    throw new Error(
-      '話数の抽出に失敗しました。書式が変更された可能性があります。'
-    )
+  for (let i = 0; i < titleNode.length; i++) {
+    const titleText = titleNode.item(i)?.textContent
+    if (!titleText) continue
+
+    // タイトル文字列から最新の話数を抽出
+    const latestRadioNum = titleText.match(regex)
+    if (latestRadioNum) return Number(latestRadioNum[1])
   }
 
-  return Number(latest[1])
+  throw new Error('最新の話数の抽出に失敗しました。')
 }
