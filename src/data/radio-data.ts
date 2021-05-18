@@ -67,14 +67,14 @@ const data: RadioData[] = [
     isWithoutChangeShow: true
   },
   {
-    id: 'maninu-3',
-    name: 'ラジオ漫画犬血道編',
+    id: 'maninu-4',
+    name: 'ラジオ漫画犬咆哮編',
     tag: 'ラジオ漫画犬',
-    regex: 'ラジオ漫画犬血道編(\\d+)',
+    regex: 'ラジオ漫画犬咆哮編(\\d+)',
     digits_1: 3,
     digits_2: 3,
     url: 'maninu/[num_1]/[num_2].mp3',
-    oldest: 102,
+    oldest: 169,
     latest: 0,
     ignore: [],
     isWithoutChangeShow: false
@@ -232,6 +232,19 @@ const data: RadioData[] = [
     url: 'maninu/[num_1]/[num_2].mp3',
     oldest: 32,
     latest: 101,
+    ignore: [],
+    isWithoutChangeShow: false
+  },
+  {
+    id: 'maninu-3',
+    name: 'ラジオ漫画犬血道編',
+    tag: 'ラジオ漫画犬',
+    regex: '',
+    digits_1: 3,
+    digits_2: 3,
+    url: 'maninu/[num_1]/[num_2].mp3',
+    oldest: 102,
+    latest: 167,
     ignore: [],
     isWithoutChangeShow: false
   }
