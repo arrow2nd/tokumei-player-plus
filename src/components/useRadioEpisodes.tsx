@@ -23,49 +23,23 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
         return
       }
 
-      // 話数とファイル名のズレを修正
-      if (data.tag === 'ラジオ漫画犬') {
-        latest += data.oldest - 1
-      }
-
       // キャッシュする
       cache[data.id] = latest
       setLatest(latest)
-      setOptions(
-        createOptions(
-          data.oldest,
-          latest,
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
+      setOptions(createOptions(data.oldest, latest, data.ignore))
     }
 
     // 更新終了済みなら受け取った値をそのまま使う
     if (data.latest !== 0) {
       setLatest(data.latest)
-      setOptions(
-        createOptions(
-          data.oldest,
-          data.latest,
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
+      setOptions(createOptions(data.oldest, data.latest, data.ignore))
       return
     }
 
-    // 取得済みなら一時キャッシュから値を取得
+    // 取得済みならキャッシュから値を取得
     if (data.id in cache) {
       setLatest(cache[data.id])
-      setOptions(
-        createOptions(
-          data.oldest,
-          cache[data.id],
-          data.ignore,
-          data.isWithoutChangeShow
-        )
-      )
+      setOptions(createOptions(data.oldest, cache[data.id], data.ignore))
       return
     }
 
@@ -79,29 +53,24 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
 /**
  * 話数の選択肢要素を作成
  *
- * @param min 最小値
- * @param max 最大値
- * @param ignore 除外リスト
- * @param isWithoutChangeShow 値をそのまま表示するか（falseなら話数を１から表示）
+ * @param oldest 最古話数
+ * @param latest 最新の話数
+ * @param ignoreList 除外リスト
  * @returns 話数の選択肢要素
  */
 function createOptions(
-  min: number,
-  max: number,
-  ignore: number[],
-  isWithoutChangeShow: boolean
+  oldest: number,
+  latest: number,
+  ignoreList: number[]
 ): JSX.Element[] {
-  const elementCount = min <= 1 ? max : max - min + 1
-  const numArray =
-    min === 0
-      ? [...Array(elementCount + 1).keys()]
-      : [...Array(elementCount).keys()].map((i) => i + min)
+  const elementCount = latest - oldest + 1
+  const numArray = [...Array(elementCount).keys()].map((i) => i + oldest)
 
   const options = numArray
-    .filter((e) => !ignore.includes(e))
+    .filter((e) => !ignoreList.includes(e))
     .map((e) => (
       <option key={e} value={e}>
-        {'# ' + String(isWithoutChangeShow ? e : e - min + 1).padStart(3, '0')}
+        {'# ' + String(e).padStart(3, '0')}
       </option>
     ))
 
@@ -144,5 +113,5 @@ async function getLatestRadioNum(tag: string, regex: string) {
     if (latestRadioNum) return Number(latestRadioNum[1])
   }
 
-  throw new Error('最新の話数の抽出に失敗しました。')
+  throw new Error('正規表現に一致する話数が見つかりませんでした。')
 }
