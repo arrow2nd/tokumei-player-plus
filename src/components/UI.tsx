@@ -94,6 +94,7 @@ const UI = (): JSX.Element => {
       if (episode !== currentEpisode) {
         setCurrentEpisode(episode)
       }
+
       return createURL(currentRadioId, episode)
     },
     [currentEpisode, currentRadioId, latest, oldest]
@@ -158,8 +159,6 @@ function createURL(radioId: number, episodeNum: number) {
 
     path = path.replace(new RegExp(`\\[num_${idx}\\]`, 'g'), paddedNumStr)
   })
-
-  console.log(path)
 
   return `https://omocoro.heteml.net/radio/${path}`
 }
