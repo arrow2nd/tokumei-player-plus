@@ -24,6 +24,7 @@
   "build": {
     "appId": "com.arrow2nd.tokumei",
     "productName": "匿名Player+",
+    "artifactName": "${name}-${version}.${ext}",
     "files": [
       "./build/**/*"
     ],
