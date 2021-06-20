@@ -235,7 +235,7 @@ const data: RadioData[] = [
   },
   {
     id: 'sebu-nagata-1',
-    name: 'セブ山・永田の金曜ラジオ [1~104]',
+    name: 'セブ山・永田の金曜ラジオ【1~104】',
     tag: '金曜ラジオ',
     regex: '',
     numData: [
@@ -252,7 +252,7 @@ const data: RadioData[] = [
   },
   {
     id: 'sebu-nagata-2',
-    name: 'セブ山・永田の金曜ラジオ [105~250]',
+    name: 'セブ山・永田の金曜ラジオ【105~250】',
     tag: '金曜ラジオ',
     regex: '',
     numData: [
@@ -286,7 +286,7 @@ const data: RadioData[] = [
   },
   {
     id: 'pakupaku-1',
-    name: 'たかや・マンスーンのパクパクラジオ [1~32]',
+    name: 'たかや・マンスーンのパクパクラジオ【1~32】',
     tag: 'パクパクラジオ',
     regex: '',
     numData: [
@@ -303,7 +303,7 @@ const data: RadioData[] = [
   },
   {
     id: 'pakupaku-2',
-    name: 'たかや・マンスーンのパクパクラジオ [33~49]',
+    name: 'たかや・マンスーンのパクパクラジオ【33~49】',
     tag: 'パクパクラジオ',
     regex: '',
     numData: [
