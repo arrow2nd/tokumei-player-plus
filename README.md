@@ -9,11 +9,4 @@ Web メディア「オモコロ」のラジオを再生する非公式のソフ�
 
 ## インストール
 
-| OS                         | ファイル名                          |
-| -------------------------- | ----------------------------------- |
-| Windows (ポータブル版)     | tokumei-player-plus x.x.x.exe       |
-| Windows (インストーラー版) | tokumei-player-plus Setup x.x.x.exe |
-| Linux                      | tokumei-player-plus x.x.x.AppImage  |
-| Linux (Debian 系)          | tokumei-player-plus x.x.x.deb       |
-
 [Releases](https://github.com/arrow2nd/tokumei-player-plus/releases) からお使いの環境にあったファイルをダウンロードしてください。
