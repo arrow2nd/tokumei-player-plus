@@ -32,10 +32,7 @@
       "output": "./dist"
     },
     "win": {
-      "target": [
-        "nsis",
-        "portable"
-      ],
+      "target": "nsis",
       "icon": "./icon/win.png"
     },
     "nsis": {
