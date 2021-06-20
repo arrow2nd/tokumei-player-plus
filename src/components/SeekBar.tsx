@@ -65,6 +65,7 @@ const SeekBar = (props: SeekBarProps): JSX.Element => {
 function createTimeStr(sec: number) {
   const minStr = String(Math.floor(sec / 60)).padStart(2, '0')
   const secStr = String(Math.floor(sec % 60)).padStart(2, '0')
+
   return `${minStr}:${secStr}`
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "tokumei-player-plus",
-  "version": "1.1.3",
+  "version": "1.2.0",
   "description": "Webメディア「オモコロ」のラジオを再生する非公式のソフトウェア",
   "author": {
     "name": "arrow2nd",
@@ -18,10 +18,13 @@
     "build:dev": "cross-env NODE_ENV=\"development\" webpack",
     "serve": "electron .",
     "pack:win": "electron-builder --win --x64",
+    "pack:mac": "electron-builder --mac --x64",
     "pack:linux": "electron-builder --linux"
   },
   "build": {
     "appId": "com.arrow2nd.tokumei",
+    "productName": "匿名Player+",
+    "artifactName": "${name}-${version}.${ext}",
     "files": [
       "./build/**/*"
     ],
@@ -33,49 +36,55 @@
         "nsis",
         "portable"
       ],
-      "icon": "./icon/icon.ico"
+      "icon": "./icon/win.png"
     },
     "nsis": {
       "oneClick": false,
       "allowToChangeInstallationDirectory": true
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "./icon/mac.png",
+      "category": "Entertainment"
     },
     "linux": {
       "target": [
         "AppImage",
         "deb"
       ],
-      "icon": "./icon",
+      "icon": "./icon/linux.png",
       "category": "Audio"
     },
     "publish": null
   },
   "devDependencies": {
     "@types/node": "^14.14.33",
-    "@types/react": "^17.0.3",
-    "@types/react-dom": "^17.0.2",
-    "@typescript-eslint/eslint-plugin": "^4.17.0",
-    "@typescript-eslint/parser": "^4.17.0",
+    "@types/react": "^17.0.11",
+    "@types/react-dom": "^17.0.8",
+    "@typescript-eslint/eslint-plugin": "^4.27.0",
+    "@typescript-eslint/parser": "^4.27.0",
     "cross-env": "^7.0.3",
-    "css-loader": "^5.1.2",
-    "electron": "^12.0.1",
-    "electron-builder": "^22.10.5",
-    "eslint": "^7.21.0",
-    "eslint-config-prettier": "^8.1.0",
-    "eslint-plugin-react": "^7.22.0",
+    "css-loader": "^5.2.6",
+    "electron": "^13.1.2",
+    "electron-builder": "^22.11.7",
+    "eslint": "^7.29.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-react": "^7.24.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "html-webpack-plugin": "^5.3.1",
-    "mini-css-extract-plugin": "^1.3.9",
+    "mini-css-extract-plugin": "^1.6.0",
     "npm-run-all": "^4.1.5",
-    "prettier": "^2.2.1",
-    "react-devtools": "^4.10.1",
+    "prettier": "^2.3.1",
+    "react-devtools": "^4.13.5",
     "rimraf": "^3.0.2",
-    "ts-loader": "^8.0.18",
-    "typescript": "^4.2.3",
-    "webpack": "^5.24.4",
-    "webpack-cli": "^4.5.0"
+    "ts-loader": "^9.2.3",
+    "typescript": "^4.3.4",
+    "webpack": "^5.39.1",
+    "webpack-cli": "^4.7.2"
   },
   "dependencies": {
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1"
+    "node": "^14.17.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }

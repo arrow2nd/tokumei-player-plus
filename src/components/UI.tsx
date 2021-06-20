@@ -50,7 +50,7 @@ const UI = (): JSX.Element => {
     const tag = radioData[currentRadioId].tag
     const isOpenWebSite = await window.api.InfoDialog(
       'ブラウザを開きますか？',
-      `「オモコロ」の「${tag}」のページを開きます。`
+      `オモコロの「${tag}」のページを開きます。`
     )
     if (isOpenWebSite) {
       window.api.OpenWebSite(tag)
@@ -94,6 +94,7 @@ const UI = (): JSX.Element => {
       if (episode !== currentEpisode) {
         setCurrentEpisode(episode)
       }
+
       return createURL(currentRadioId, episode)
     },
     [currentEpisode, currentRadioId, latest, oldest]
@@ -141,16 +142,25 @@ const UI = (): JSX.Element => {
  * URLを作成
  *
  * @param radioId ラジオID
- * @param episodeNo 話数
+ * @param episodeNum 話数
  * @returns URL文字列
  */
-function createURL(radioId: number, episodeNo: number) {
-  const num = String(episodeNo)
+function createURL(radioId: number, episodeNum: number) {
   const currentRadio = radioData[radioId]
-  const path = currentRadio.url
-    .replace(/\[num_1\]/g, num.padStart(currentRadio.digits_1, '0'))
-    .replace(/\[num_2\]/g, num.padStart(currentRadio.digits_2, '0'))
-  return 'https://omocoro.heteml.net/radio/' + path
+  let path = currentRadio.url
+
+  // URLにファイル名を追加
+  currentRadio.numData.forEach((numData, idx) => {
+    // 続きの話数ならそのまま使用、それ以外ならファイル番号を計算する。
+    const num = currentRadio.isContinuation
+      ? episodeNum
+      : numData.start + episodeNum - currentRadio.oldest
+    const paddedNumStr = String(num).padStart(numData.padNum, '0')
+
+    path = path.replace(new RegExp(`\\[num_${idx}\\]`, 'g'), paddedNumStr)
+  })
+
+  return `https://omocoro.heteml.net/radio/${path}`
 }
 
 export default UI

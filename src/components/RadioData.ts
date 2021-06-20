@@ -1,13 +1,17 @@
+type NumData = {
+  start: number
+  padNum: number
+}
+
 export type RadioData = {
   id: string
   name: string
   tag: string
   regex: string
-  digits_1: number
-  digits_2: number
   url: string
+  numData: NumData[]
   oldest: number
   latest: number
   ignore: number[]
-  isWithoutChangeShow: boolean
+  isContinuation: boolean
 }
