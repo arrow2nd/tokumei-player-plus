@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Changed
+
+- Windows/Linux 向けのアイコンを変更
+
 ## [1.2.1] - 2021-06-20
 
 ### Fixed
