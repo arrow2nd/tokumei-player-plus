@@ -155,9 +155,22 @@ function createURL(radioId: number, episodeNum: number) {
     const num = currentRadio.isContinuation
       ? episodeNum
       : numData.start + episodeNum - currentRadio.oldest
-    const paddedNumStr = String(num).padStart(numData.padNum, '0')
 
-    path = path.replace(new RegExp(`\\[num_${idx}\\]`, 'g'), paddedNumStr)
+    let numStr = ''
+
+    // 置換が必要かチェック
+    for (const replace of currentRadio.replace) {
+      if (num === replace.before) {
+        numStr = replace.after
+      }
+    }
+
+    // 0埋めする
+    if (numStr === '') {
+      numStr = String(num).padStart(numData.padNum, '0')
+    }
+
+    path = path.replace(new RegExp(`\\[num_${idx}\\]`, 'g'), numStr)
   })
 
   return `https://omocoro.heteml.net/radio/${path}`
