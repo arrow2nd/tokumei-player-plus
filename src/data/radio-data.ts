@@ -4,16 +4,16 @@ const data: RadioData[] = [
   // --- 更新中 ---
   {
     id: 'arispa',
-    name: 'ありっちゃありスパーク',
+    name: 'ありっちゃありスパーク・マシュ',
     tag: 'ありっちゃありスパーク',
-    regex: 'ありっちゃありスパーク(\\d+)',
+    regex: 'ありっちゃありスパーク・マシュ(\\d+)',
     numData: [
       {
         start: 1,
         padNum: 3
       }
     ],
-    url: 'arispa/[num_0]/[num_0].mp3',
+    url: 'arimasyu/[num_0]/[num_0]mas.mp3',
     oldest: 1,
     latest: 0,
     ignore: [],
@@ -145,6 +145,23 @@ const data: RadioData[] = [
     url: 'ariari/[num_0]/[num_0].mp3',
     oldest: 1,
     latest: 158,
+    ignore: [],
+    isContinuation: false
+  },
+  {
+    id: 'arispa',
+    name: 'ありっちゃありスパーク',
+    tag: 'ありっちゃありスパーク',
+    regex: '',
+    numData: [
+      {
+        start: 1,
+        padNum: 3
+      }
+    ],
+    url: 'arispa/[num_0]/[num_0].mp3',
+    oldest: 1,
+    latest: 100,
     ignore: [],
     isContinuation: false
   },
