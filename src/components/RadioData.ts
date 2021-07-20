@@ -3,6 +3,11 @@ type NumData = {
   padNum: number
 }
 
+type ReplaceData = {
+  before: number
+  after: string
+}
+
 export type RadioData = {
   id: string
   name: string
@@ -13,5 +18,6 @@ export type RadioData = {
   oldest: number
   latest: number
   ignore: number[]
+  replace: ReplaceData[]
   isContinuation: boolean
 }

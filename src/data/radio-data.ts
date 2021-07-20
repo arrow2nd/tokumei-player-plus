@@ -17,6 +17,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -34,6 +35,12 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 0,
     ignore: [217],
+    replace: [
+      {
+        before: 263,
+        after: '26a3'
+      }
+    ],
     isContinuation: false
   },
   {
@@ -51,6 +58,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -72,6 +80,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -89,6 +98,7 @@ const data: RadioData[] = [
     oldest: 0,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -110,6 +120,7 @@ const data: RadioData[] = [
     oldest: 0,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -127,6 +138,7 @@ const data: RadioData[] = [
     oldest: 0,
     latest: 0,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
 
@@ -146,6 +158,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 158,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -161,8 +174,18 @@ const data: RadioData[] = [
     ],
     url: 'arispa/[num_0]/[num_0].mp3',
     oldest: 1,
-    latest: 100,
+    latest: 101,
     ignore: [],
+    replace: [
+      {
+        before: 100,
+        after: '0995'
+      },
+      {
+        before: 101,
+        after: '100'
+      }
+    ],
     isContinuation: false
   },
   {
@@ -180,6 +203,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 56,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -195,8 +219,14 @@ const data: RadioData[] = [
     ],
     url: 'kamamicu/l[num_0]/l[num_0].mp3',
     oldest: 1,
-    latest: 51,
+    latest: 52,
     ignore: [],
+    replace: [
+      {
+        before: 52,
+        after: '972000'
+      }
+    ],
     isContinuation: false
   },
   {
@@ -214,6 +244,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 32,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -231,6 +262,7 @@ const data: RadioData[] = [
     oldest: 33,
     latest: 58,
     ignore: [],
+    replace: [],
     isContinuation: true
   },
   {
@@ -248,6 +280,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 4,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -265,6 +298,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 104,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -282,6 +316,7 @@ const data: RadioData[] = [
     oldest: 105,
     latest: 250,
     ignore: [],
+    replace: [],
     isContinuation: true
   },
   {
@@ -299,6 +334,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 100,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -316,6 +352,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 32,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -333,6 +370,7 @@ const data: RadioData[] = [
     oldest: 33,
     latest: 49,
     ignore: [],
+    replace: [],
     isContinuation: true
   },
   {
@@ -350,6 +388,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 31,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -367,6 +406,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 31,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -384,6 +424,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 70,
     ignore: [],
+    replace: [],
     isContinuation: false
   },
   {
@@ -401,6 +442,7 @@ const data: RadioData[] = [
     oldest: 1,
     latest: 66,
     ignore: [],
+    replace: [],
     isContinuation: false
   }
 ]
