@@ -34,7 +34,7 @@ const data: RadioData[] = [
     url: 'tokumei/[num_0].mp3',
     oldest: 1,
     latest: 0,
-    ignore: [217],
+    ignore: [217, 268],
     replace: [
       {
         before: 263,
@@ -47,6 +47,18 @@ const data: RadioData[] = [
       {
         before: 265,
         after: '2y65'
+      },
+      {
+        before: 266,
+        after: '26m6o'
+      },
+      {
+        before: 267,
+        after: '267u'
+      },
+      {
+        before: 269,
+        after: '269sr'
       }
     ],
     isContinuation: false
