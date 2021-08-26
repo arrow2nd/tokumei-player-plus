@@ -10,6 +10,7 @@ function createWindow(): void {
     frame: false,
     maximizable: false,
     resizable: false,
+    show: false,
     webPreferences: {
       // https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions
       worldSafeExecuteJavaScript: true,
@@ -23,6 +24,9 @@ function createWindow(): void {
 
   win.loadFile('./build/index.html')
 
+  // 表示可能になったら表示する
+  win.once('ready-to-show', () => win.show())
+
   // メニューを無効化
   Menu.setApplicationMenu(null)
 }
@@ -34,7 +38,7 @@ if (!doubleboot) {
 }
 
 // 初期化できたらウィンドウを作成
-app.whenReady().then(createWindow)
+app.whenReady().then(() => createWindow())
 
 app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
@@ -68,7 +72,7 @@ ipcMain.handle(
     content: string
   ): Promise<Electron.MessageBoxReturnValue> => {
     const option = {
-      type: 'info',
+      type: 'question',
       buttons: ['Yes', 'No'],
       title: '確認',
       message: title,
