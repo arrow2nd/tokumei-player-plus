@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { RadioData } from './RadioData'
+import { RadioData } from '../types/RadioData'
 
 type SelectProps = {
   isPlaying: boolean

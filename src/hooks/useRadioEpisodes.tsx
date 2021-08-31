@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { RadioData } from './RadioData'
+import { RadioData } from '../types/RadioData'
 
 const cache: { [s: string]: number } = {}
 
@@ -16,10 +16,16 @@ export const useRadioEpisodes = (data: RadioData): RadioEpisodesType => {
   useEffect(() => {
     const fetchLatestNumber = async () => {
       let latest: number
+
       try {
-        latest = await getLatestRadioNum(data.tag, data.regex)
-      } catch (err) {
-        window.api.ErrorDialog('最新の話数が取得できませんでした', err.message)
+        latest = await fetchLatestRadioNum(data.tag, data.regex)
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          window.api.ErrorDialog(
+            '最新の話数が取得できませんでした',
+            err.message
+          )
+        }
         return
       }
 
@@ -84,7 +90,7 @@ function createOptions(
  * @param regex 正規表現文字列
  * @return 最新の話数
  */
-async function getLatestRadioNum(tag: string, regex: string) {
+async function fetchLatestRadioNum(tag: string, regex: string) {
   const url = `https://omocoro.jp/tag/${encodeURIComponent(tag)}`
   const res = await fetch(url).catch(() => {
     throw new Error(

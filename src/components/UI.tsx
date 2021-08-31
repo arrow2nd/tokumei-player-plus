@@ -1,9 +1,9 @@
 import React, { useState, useCallback, useEffect } from 'react'
+import { useAudio } from '../hooks/useAudio'
+import { useRadioEpisodes } from '../hooks/useRadioEpisodes'
 import Select from './Select'
 import SeekBar from './SeekBar'
 import Control from './Control'
-import { useAudio } from './useAudio'
-import { useRadioEpisodes } from './useRadioEpisodes'
 import radioData from '../data/radio-data'
 
 const UI = (): JSX.Element => {

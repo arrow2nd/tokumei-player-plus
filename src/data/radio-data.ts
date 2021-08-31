@@ -1,4 +1,4 @@
-import { RadioData } from '../components/RadioData'
+import { RadioData } from '../types/RadioData'
 
 const data: RadioData[] = [
   // --- 更新中 ---
