@@ -12,12 +12,11 @@ function createWindow(): void {
     resizable: false,
     show: false,
     webPreferences: {
-      // https://www.electronjs.org/docs/api/browser-window#new-browserwindowoptions
-      worldSafeExecuteJavaScript: true,
       // nodeモジュールをレンダラープロセスで使用不可に（XSS対策）
       nodeIntegration: false,
       // 実行コンテキストを分離
       contextIsolation: true,
+      devTools: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -27,7 +26,6 @@ function createWindow(): void {
   // 表示可能になったら表示する
   win.once('ready-to-show', () => win.show())
 
-  // メニューを無効化
   Menu.setApplicationMenu(null)
 }
 
