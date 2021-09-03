@@ -78,7 +78,7 @@ const renderer = {
       filename: 'index.html',
       template: path.resolve(__dirname, 'src', 'index.html'),
       inject: 'body',
-      minify: isDevelop
+      minify: !isDevelop
     }),
     new MiniCssExtractPlugin()
   ]
