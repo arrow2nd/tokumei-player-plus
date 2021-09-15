@@ -1,12 +1,11 @@
 import React, { useCallback } from 'react'
-
-import playIcon from '../images/play_arrow-white-24dp.svg'
-import pauseIcon from '../images/pause-white-24dp.svg'
-import prevIcon from '../images/skip_previous-white-24dp.svg'
-import nextIcon from '../images/skip_next-white-24dp.svg'
-import openIcon from '../images/open_in_browser-white-24dp.svg'
-import shuffleOnIcon from '../images/shuffle_on-white-24dp.svg'
-import shuffleOffIcon from '../images/shuffle-white-24dp.svg'
+import playIcon from '../../images/play_arrow-white-24dp.svg'
+import pauseIcon from '../../images/pause-white-24dp.svg'
+import prevIcon from '../../images/skip_previous-white-24dp.svg'
+import nextIcon from '../../images/skip_next-white-24dp.svg'
+import openIcon from '../../images/open_in_browser-white-24dp.svg'
+import shuffleOnIcon from '../../images/shuffle_on-white-24dp.svg'
+import shuffleOffIcon from '../../images/shuffle-white-24dp.svg'
 
 type ControlProps = {
   isPlaying: boolean
