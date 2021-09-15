@@ -12,11 +12,9 @@ function createWindow(): void {
     resizable: false,
     show: false,
     webPreferences: {
-      // nodeモジュールをレンダラープロセスで使用不可に（XSS対策）
       nodeIntegration: false,
-      // 実行コンテキストを分離
       contextIsolation: true,
-      devTools: false,
+      // devTools: false,
       preload: path.join(__dirname, 'preload.js')
     }
   })
@@ -27,6 +25,8 @@ function createWindow(): void {
   win.once('ready-to-show', () => win.show())
 
   Menu.setApplicationMenu(null)
+
+  win.webContents.openDevTools()
 }
 
 // 多重起動を防止

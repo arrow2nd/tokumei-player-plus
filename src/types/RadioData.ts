@@ -1,23 +1,16 @@
-type NumData = {
-  start: number
-  padNum: number
-}
-
-type ReplaceData = {
-  before: number
-  after: string
+export type RadioInfo = {
+  name: string
+  onAir: boolean
 }
 
 export type RadioData = {
-  id: string
   name: string
   tag: string
-  regex: string
+  items: RadioItem[]
+}
+
+export type RadioItem = {
+  title: string
+  num: number
   url: string
-  numData: NumData[]
-  oldest: number
-  latest: number
-  ignore: number[]
-  replace: ReplaceData[]
-  isContinuation: boolean
 }
