@@ -3,7 +3,7 @@
 [![release](https://github.com/arrow2nd/tokumei-player-plus/actions/workflows/build.yaml/badge.svg)](https://github.com/arrow2nd/tokumei-player-plus/actions/workflows/build.yaml)[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat)](https://github.com/prettier/prettier)
 ![GitHub](https://img.shields.io/github/license/arrow2nd/tokumei-player-plus)
 
-> 【お知らせ】[匿名Player++](https://github.com/arrow2nd/tokumei-player-pp) をご利用ください...！
+> 【開発終了】以降は [匿名Player++](https://github.com/arrow2nd/tokumei-player-pp) をご利用ください...！
 
 Web メディア「オモコロ」のラジオを再生する非公式のソフトウェア
 
